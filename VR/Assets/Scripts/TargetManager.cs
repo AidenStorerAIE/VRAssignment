@@ -44,7 +44,7 @@ public class TargetManager : MonoBehaviour
                             else
                             {
                                 targets[gameObjects.IndexOf(gameObject)].active = false;
-                                NextTarget(gameObject);
+                                NextTargetLoss(gameObject);
                                 return;
                             }
                         }
@@ -78,7 +78,7 @@ public class TargetManager : MonoBehaviour
         C2,
         C3,
     }
-    private void NextTarget(GameObject target)
+    private void NextTargetLoss(GameObject target)
     {
         targetCount++;
         if (targetCount < targets.Length)
@@ -87,8 +87,24 @@ public class TargetManager : MonoBehaviour
             GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
             gameObjects.Add(createdTarget);
             targets[gameObjects.IndexOf(createdTarget)].active = true;
-            target.SetActive(false);        
         }
+        target.GetComponent<Animator>().SetTrigger("TargetDrop");
+        targets[gameObjects.IndexOf(target)].active = false;
+        return;
+    }
+    public void NextTargetWin(GameObject target)
+    {
+        targetCount++;
+        if (targetCount < targets.Length)
+        {
+            int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+            GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+            gameObjects.Add(createdTarget);
+            targets[gameObjects.IndexOf(createdTarget)].active = true;
+        }
+        target.GetComponent<Animator>().SetTrigger("TargetDrop");
+        targets[gameObjects.IndexOf(target)].active = false;
+        return;
     }
     private void InitialTarget()
     {

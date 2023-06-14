@@ -276,13 +276,13 @@ MonoBehaviour:
   targets:
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 000000000100000002000000
-    loopCount: 0
+    loopCount: 2
     speed: 5
     nextPosition: 0
     currentLoop: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
-    locations: 000000000300000006000000
+    locations: 060000000700000008000000
     loopCount: 3
     speed: 5
     nextPosition: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
     currentLoop: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
-    locations: 000000000400000008000000
+    locations: 040000000500000003000000
     loopCount: 3
     speed: 5
     nextPosition: 0
@@ -304,6 +304,20 @@ MonoBehaviour:
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 000000000100000002000000
+    loopCount: 3
+    speed: 5
+    nextPosition: 0
+    currentLoop: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0100000002000000050000000800000007000000060000000300000000000000
+    loopCount: 3
+    speed: 5
+    nextPosition: 0
+    currentLoop: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0100000002000000050000000800000007000000060000000300000000000000
     loopCount: 3
     speed: 5
     nextPosition: 0
@@ -321,7 +335,7 @@ MonoBehaviour:
   - {fileID: 764702093}
   - {fileID: 2051972501}
   - {fileID: 495779001}
-  targetCount: 0
+  targetCount: 6
   running: 0
 --- !u!1 &705507993
 GameObject:
@@ -479,6 +493,81 @@ Transform:
   m_Father: {fileID: 1708549411}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &798003389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798003391}
+  - component: {fileID: 798003390}
+  - component: {fileID: 798003392}
+  m_Layer: 0
+  m_Name: TestingMouseObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &798003390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798003389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b7afe7469f086459318912bbc678ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &798003391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798003389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.22644174, y: -6.1208334, z: -6.1331396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &798003392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798003389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 43f2fa4eef29aeb47a75884190dc12c0, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &886553898
 GameObject:
   m_ObjectHideFlags: 0
