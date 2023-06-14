@@ -7,35 +7,47 @@ public class TargetManager : MonoBehaviour
 {
     public Target[] targets;
     public List<GameObject> gameObjects;
+    public List<GameObject> gameObjectsToAdd;
+    public List<Transform> moveToLocation;
+    public int targetCount;
+    public bool running;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject target = Instantiate(targets[0].target, targets[0].transforms[0].position, Quaternion.identity);
-        gameObjects.Add(target);
+        InitialTarget();
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject gameObject in gameObjects)
+        if (gameObjects.Count > 0)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targets[gameObjects.IndexOf(gameObject)].transforms[targets[gameObjects.IndexOf(gameObject)].nextPosition].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
-            if (gameObject.transform.position == targets[gameObjects.IndexOf(gameObject)].transforms[targets[gameObjects.IndexOf(gameObject)].nextPosition].position)
+            foreach (GameObject gameObject in gameObjects)
             {
-                if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].transforms.Count)
+                if (targets[gameObjects.IndexOf(gameObject)].active == true)
                 {
-                    targets[gameObjects.IndexOf(gameObject)].nextPosition += 1;
-                }
-                else
-                {
-                    if (targets[gameObjects.IndexOf(gameObject)].currentLoop != targets[gameObjects.IndexOf(gameObject)].loopCount)
+                    int locationValue = Convert.ToInt32(targets[gameObjects.IndexOf(gameObject)].locations[targets[gameObjects.IndexOf(gameObject)].nextPosition]);
+                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, moveToLocation[locationValue].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
+                    if (gameObject.transform.position == moveToLocation[locationValue].position)
                     {
-                        targets[gameObjects.IndexOf(gameObject)].nextPosition = 0;
-                        targets[gameObjects.IndexOf(gameObject)].currentLoop += 1;
-                    }
-                    else
-                    {
-                        DestroyTarget(gameObject);
+                        if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].locations.Count)
+                        {
+                            targets[gameObjects.IndexOf(gameObject)].nextPosition += 1;
+                        }
+                        else
+                        {
+                            if (targets[gameObjects.IndexOf(gameObject)].currentLoop != targets[gameObjects.IndexOf(gameObject)].loopCount)
+                            {
+                                targets[gameObjects.IndexOf(gameObject)].nextPosition = 0;
+                                targets[gameObjects.IndexOf(gameObject)].currentLoop += 1;
+                            }
+                            else
+                            {
+                                targets[gameObjects.IndexOf(gameObject)].active = false;
+                                NextTarget(gameObject);
+                                return;
+                            }
+                        }
                     }
                 }
             }
@@ -45,16 +57,44 @@ public class TargetManager : MonoBehaviour
     public struct Target
     {
         public GameObject target;
-        public List<Transform> transforms;
+        public List<Locations> locations;
         public int loopCount;
         public float speed;
         [HideInInspector]
         public int nextPosition;
         [HideInInspector]
         public int currentLoop;
+        public bool active;
     }
-    private void DestroyTarget(GameObject target)
+    public enum Locations
     {
-        target.SetActive(false);
+        A1,
+        A2,
+        A3,
+        B1,
+        B2,
+        B3,
+        C1,
+        C2,
+        C3,
+    }
+    private void NextTarget(GameObject target)
+    {
+        targetCount++;
+        if (targetCount < targets.Length)
+        {
+            int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+            GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+            gameObjects.Add(createdTarget);
+            targets[gameObjects.IndexOf(createdTarget)].active = true;
+            target.SetActive(false);        
+        }
+    }
+    private void InitialTarget()
+    {
+        int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+        GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+        gameObjects.Add(createdTarget);
+        targets[gameObjects.IndexOf(createdTarget)].active = true;
     }
 }
