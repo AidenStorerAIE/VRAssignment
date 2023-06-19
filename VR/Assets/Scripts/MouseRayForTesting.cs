@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class MouseRayForTesting : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private GameObject setTarget;
+    public GameObject setTarget;
     private TargetManager targetManager;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class MouseRayForTesting : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 1000))
         {
             if (hit.collider.gameObject.tag == "TargetCollider")
             {

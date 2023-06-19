@@ -317,12 +317,13 @@ MonoBehaviour:
     currentLoop: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
-    locations: 0100000002000000050000000800000007000000060000000300000000000000
+    locations: 0200000005000000080000000700000006000000030000000000000002000000
     loopCount: 3
     speed: 5
     nextPosition: 0
     currentLoop: 0
     active: 0
+  numberToSpawn: 020000000200000003000000
   gameObjects: []
   gameObjectsToAdd: []
   moveToLocation:
@@ -335,8 +336,9 @@ MonoBehaviour:
   - {fileID: 764702093}
   - {fileID: 2051972501}
   - {fileID: 495779001}
-  targetCount: 6
+  targetCount: 0
   running: 0
+  countToNextSpawn: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

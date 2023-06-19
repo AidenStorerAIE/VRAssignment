@@ -6,11 +6,15 @@ using System;
 public class TargetManager : MonoBehaviour
 {
     public Target[] targets;
+    public List<int> numberToSpawn;
     public List<GameObject> gameObjects;
     public List<GameObject> gameObjectsToAdd;
     public List<Transform> moveToLocation;
+    public int groupCount;
     public int targetCount;
+    [HideInInspector]
     public bool running;
+    public int countToNextSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,13 +84,22 @@ public class TargetManager : MonoBehaviour
     }
     private void NextTargetLoss(GameObject target)
     {
-        targetCount++;
-        if (targetCount < targets.Length)
+        countToNextSpawn--;
+        if (countToNextSpawn <= 0)
         {
-            int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
-            GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
-            gameObjects.Add(createdTarget);
-            targets[gameObjects.IndexOf(createdTarget)].active = true;
+            if (groupCount < numberToSpawn.Count)
+            {
+                countToNextSpawn = numberToSpawn[groupCount];
+                groupCount++;
+                for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+                {
+                    targetCount++;
+                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+                    GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+                    gameObjects.Add(createdTarget);
+                    targets[gameObjects.IndexOf(createdTarget)].active = true;
+                }
+            }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         targets[gameObjects.IndexOf(target)].active = false;
@@ -94,13 +107,22 @@ public class TargetManager : MonoBehaviour
     }
     public void NextTargetWin(GameObject target)
     {
-        targetCount++;
-        if (targetCount < targets.Length)
+        countToNextSpawn--;
+        if (countToNextSpawn <= 0)
         {
-            int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
-            GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
-            gameObjects.Add(createdTarget);
-            targets[gameObjects.IndexOf(createdTarget)].active = true;
+            if (groupCount < numberToSpawn.Count)
+            {
+                countToNextSpawn = numberToSpawn[groupCount];
+                groupCount++;
+                for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+                {
+                    targetCount++;
+                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+                    GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+                    gameObjects.Add(createdTarget);
+                    targets[gameObjects.IndexOf(createdTarget)].active = true;
+                }
+            }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         targets[gameObjects.IndexOf(target)].active = false;
@@ -108,9 +130,16 @@ public class TargetManager : MonoBehaviour
     }
     private void InitialTarget()
     {
-        int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
-        GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
-        gameObjects.Add(createdTarget);
-        targets[gameObjects.IndexOf(createdTarget)].active = true;
+        countToNextSpawn = numberToSpawn[groupCount];
+        groupCount++;
+        targetCount = -1;
+        for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+        {
+            targetCount++;
+            int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+            GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+            gameObjects.Add(createdTarget);
+            targets[gameObjects.IndexOf(createdTarget)].active = true;
+        }
     }
 }
