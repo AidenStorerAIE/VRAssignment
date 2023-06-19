@@ -301,7 +301,7 @@ MonoBehaviour:
     currentLoop: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
-    locations: 000000000100000002000000
+    locations: 000000000300000006000000
     loopCount: 3
     speed: 5
     nextPosition: 0
@@ -321,7 +321,28 @@ MonoBehaviour:
     nextPosition: 0
     currentLoop: 0
     active: 0
-  numberToSpawn: 02000000020000000100000002000000
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 020000000500000008000000
+    loopCount: 3
+    speed: 5
+    nextPosition: 0
+    currentLoop: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 000000000300000006000000
+    loopCount: 3
+    speed: 5
+    nextPosition: 0
+    currentLoop: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 010000000400000007000000
+    loopCount: 3
+    speed: 5
+    nextPosition: 0
+    currentLoop: 0
+    active: 0
+  numberToSpawn: 0200000002000000010000000200000003000000
   gameObjects: []
   moveToLocation:
   - {fileID: 8114979863968547917}

@@ -95,7 +95,7 @@ public class TargetManager : MonoBehaviour
                 for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
                 {
                     targetCount++;
-                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[0]);
                     GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
                     gameObjects.Add(createdTarget);
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
@@ -122,7 +122,7 @@ public class TargetManager : MonoBehaviour
                 for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
                 {
                     targetCount++;
-                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[0]);
                     GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
                     gameObjects.Add(createdTarget);
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
