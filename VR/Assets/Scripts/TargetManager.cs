@@ -19,7 +19,7 @@ public class TargetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitialTarget();
+
     }
 
     // Update is called once per frame
@@ -31,27 +31,46 @@ public class TargetManager : MonoBehaviour
             {
                 if (targets[gameObjects.IndexOf(gameObject)].active == true)
                 {
-                    int locationValue = Convert.ToInt32(targets[gameObjects.IndexOf(gameObject)].locations[targets[gameObjects.IndexOf(gameObject)].nextPosition]);
-                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, moveToLocation[locationValue].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
-                    if (gameObject.transform.position == moveToLocation[locationValue].position)
+                    if (targets[gameObjects.IndexOf(gameObject)].locations.Count > 1)
                     {
-                        if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].locations.Count)
+                        int locationValue = Convert.ToInt32(targets[gameObjects.IndexOf(gameObject)].locations[targets[gameObjects.IndexOf(gameObject)].nextPosition]);
+                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, moveToLocation[locationValue].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
+                        if (gameObject.transform.position == moveToLocation[locationValue].position)
                         {
-                            targets[gameObjects.IndexOf(gameObject)].nextPosition += 1;
-                        }
-                        else
-                        {
-                            if (targets[gameObjects.IndexOf(gameObject)].currentLoop != targets[gameObjects.IndexOf(gameObject)].loopCount)
+                            if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].locations.Count)
                             {
-                                targets[gameObjects.IndexOf(gameObject)].nextPosition = 0;
-                                targets[gameObjects.IndexOf(gameObject)].currentLoop += 1;
+                                targets[gameObjects.IndexOf(gameObject)].nextPosition += 1;
                             }
                             else
                             {
-                                targets[gameObjects.IndexOf(gameObject)].active = false;
-                                LossTarget(gameObject);
-                                return;
+                                if (targets[gameObjects.IndexOf(gameObject)].currentLoop != targets[gameObjects.IndexOf(gameObject)].loopCount)
+                                {
+                                    targets[gameObjects.IndexOf(gameObject)].nextPosition = 0;
+                                    targets[gameObjects.IndexOf(gameObject)].currentLoop += 1;
+                                }
+                                else
+                                {
+                                    targets[gameObjects.IndexOf(gameObject)].active = false;
+                                    LossTarget(gameObject);
+                                    return;
+                                }
                             }
+                        }
+                    }
+                    else
+                    {
+                        if (targets[gameObjects.IndexOf(gameObject)].timing == false)
+                        {
+                            targets[gameObjects.IndexOf(gameObject)].startTime = Time.time;
+                            targets[gameObjects.IndexOf(gameObject)].timing = true;
+                            return;
+                        }
+                        if (Time.time > (targets[gameObjects.IndexOf(gameObject)].startTime + targets[gameObjects.IndexOf(gameObject)].lifeTime))
+                        {
+                            targets[gameObjects.IndexOf(gameObject)].active = false;
+                            targets[gameObjects.IndexOf(gameObject)].timing = false;
+                            LossTarget(gameObject);
+                            return;
                         }
                     }
                 }
@@ -65,10 +84,16 @@ public class TargetManager : MonoBehaviour
         public List<Locations> locations;
         public int loopCount;
         public float speed;
+        public float lifeTime;
         [HideInInspector]
         public int nextPosition;
         [HideInInspector]
         public int currentLoop;
+        [HideInInspector]
+        public bool timing;
+        [HideInInspector]
+        public float startTime;
+        [HideInInspector]
         public bool active;
     }
     public enum Locations
@@ -99,6 +124,7 @@ public class TargetManager : MonoBehaviour
                     GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
                     gameObjects.Add(createdTarget);
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
+                    targets[gameObjects.IndexOf(createdTarget)].timing = false;
                 }
             }
             else
@@ -126,6 +152,7 @@ public class TargetManager : MonoBehaviour
                     GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
                     gameObjects.Add(createdTarget);
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
+                    targets[gameObjects.IndexOf(createdTarget)].timing = false;
                 }
             }
             else
@@ -157,10 +184,11 @@ public class TargetManager : MonoBehaviour
             for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
             {
                 targetCount++;
-                int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+                int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[0]);
                 GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
                 gameObjects.Add(createdTarget);
                 targets[gameObjects.IndexOf(createdTarget)].active = true;
+                targets[gameObjects.IndexOf(createdTarget)].timing = false;
             }
         }
     }

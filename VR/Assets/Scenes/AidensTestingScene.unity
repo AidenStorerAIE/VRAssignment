@@ -540,6 +540,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TargetManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8114979863412067626, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[0].lifeTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114979863412067626, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[0].locations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8114979863412067627, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
       propertyPath: m_RootOrder
       value: 3
