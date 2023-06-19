@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class TargetManager : MonoBehaviour
 {
@@ -16,10 +17,11 @@ public class TargetManager : MonoBehaviour
     public bool running;
     [HideInInspector]
     public int countToNextSpawn;
+    public XRInteractionManager interactionManager;
     // Start is called before the first frame update
     void Start()
     {
-
+        InitialTarget();
     }
 
     // Update is called once per frame
@@ -125,11 +127,13 @@ public class TargetManager : MonoBehaviour
                     gameObjects.Add(createdTarget);
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
                     targets[gameObjects.IndexOf(createdTarget)].timing = false;
+                    createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
                 }
             }
             else
             {
                 running = false;
+                InitialTarget();
             }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
@@ -153,11 +157,13 @@ public class TargetManager : MonoBehaviour
                     gameObjects.Add(createdTarget);
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
                     targets[gameObjects.IndexOf(createdTarget)].timing = false;
+                    createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
                 }
             }
             else
             {
                 running = false;
+                InitialTarget();
             }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
@@ -189,6 +195,7 @@ public class TargetManager : MonoBehaviour
                 gameObjects.Add(createdTarget);
                 targets[gameObjects.IndexOf(createdTarget)].active = true;
                 targets[gameObjects.IndexOf(createdTarget)].timing = false;
+                createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
             }
         }
     }
