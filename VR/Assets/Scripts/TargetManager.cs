@@ -17,11 +17,12 @@ public class TargetManager : MonoBehaviour
     public bool running;
     [HideInInspector]
     public int countToNextSpawn;
-    public XRInteractionManager interactionManager;
+    XRInteractionManager interactionManager;
     // Start is called before the first frame update
     void Start()
     {
         InitialTarget();
+        interactionManager = FindObjectOfType<XRInteractionManager>();
     }
 
     // Update is called once per frame
