@@ -273,74 +273,104 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
-    locations: 000000000100000002000000
+    locations: 00000000
     loopCount: 2
     speed: 5
+    lifeTime: 10
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 060000000700000008000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 00000000010000000400000003000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 04000000070000000800000005000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 000000000300000006000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 0100000002000000050000000800000007000000060000000300000000000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 0200000005000000080000000700000006000000030000000000000002000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 020000000500000008000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 000000000300000006000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
     locations: 010000000400000007000000
     loopCount: 3
     speed: 5
+    lifeTime: 0
     nextPosition: 0
     currentLoop: 0
+    timing: 0
+    startTime: 0
     active: 0
   numberToSpawn: 0200000002000000010000000200000003000000
   gameObjects: []
