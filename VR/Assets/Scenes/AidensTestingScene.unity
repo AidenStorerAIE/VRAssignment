@@ -296,7 +296,7 @@ MonoBehaviour:
     currentLoop: 0
     active: 0
   - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
-    locations: 040000000500000003000000
+    locations: 04000000070000000800000005000000
     loopCount: 3
     speed: 5
     nextPosition: 0
@@ -336,6 +336,7 @@ MonoBehaviour:
   - {fileID: 764702093}
   - {fileID: 2051972501}
   - {fileID: 495779001}
+  groupCount: 0
   targetCount: 0
   running: 0
   countToNextSpawn: 0
@@ -525,6 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b7afe7469f086459318912bbc678ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setTarget: {fileID: 0}
 --- !u!4 &798003391
 Transform:
   m_ObjectHideFlags: 0

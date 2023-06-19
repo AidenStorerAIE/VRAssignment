@@ -48,7 +48,7 @@ public class TargetManager : MonoBehaviour
                             else
                             {
                                 targets[gameObjects.IndexOf(gameObject)].active = false;
-                                NextTargetLoss(gameObject);
+                                LossTarget(gameObject);
                                 return;
                             }
                         }
@@ -82,7 +82,7 @@ public class TargetManager : MonoBehaviour
         C2,
         C3,
     }
-    private void NextTargetLoss(GameObject target)
+    private void LossTarget(GameObject target)
     {
         countToNextSpawn--;
         if (countToNextSpawn <= 0)
@@ -105,7 +105,7 @@ public class TargetManager : MonoBehaviour
         targets[gameObjects.IndexOf(target)].active = false;
         return;
     }
-    public void NextTargetWin(GameObject target)
+    public void DropTarget(GameObject target)
     {
         countToNextSpawn--;
         if (countToNextSpawn <= 0)

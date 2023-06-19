@@ -41,7 +41,7 @@ public class MouseRayForTesting : MonoBehaviour
     {
         if (setTarget != null && targetManager.targets[targetManager.gameObjects.IndexOf(setTarget.gameObject)].active == true)
         {
-            targetManager.NextTargetWin(setTarget);
+            targetManager.DropTarget(setTarget);
         }
     }
 }
