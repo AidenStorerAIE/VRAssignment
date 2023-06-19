@@ -133,6 +133,7 @@ public class TargetManager : MonoBehaviour
             else
             {
                 running = false;
+                //REMOVE THIS TO SETUP RESET
                 InitialTarget();
             }
         }
@@ -163,6 +164,7 @@ public class TargetManager : MonoBehaviour
             else
             {
                 running = false;
+                //REMOVE THIS TO SETUP RESET
                 InitialTarget();
             }
         }
