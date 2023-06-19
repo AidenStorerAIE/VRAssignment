@@ -14,6 +14,7 @@ public class MouseRayForTesting : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         targetManager = FindObjectOfType<TargetManager>();
         playerInput.actions["Click"].performed += TestFire;
+        playerInput.actions["Reset"].performed += Reset;
     }
 
     // Update is called once per frame
@@ -43,5 +44,9 @@ public class MouseRayForTesting : MonoBehaviour
         {
             targetManager.DropTarget(setTarget);
         }
+    }
+    private void Reset(InputAction.CallbackContext context)
+    {
+        targetManager.InitialTarget();
     }
 }

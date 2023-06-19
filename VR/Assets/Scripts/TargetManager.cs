@@ -8,12 +8,13 @@ public class TargetManager : MonoBehaviour
     public Target[] targets;
     public List<int> numberToSpawn;
     public List<GameObject> gameObjects;
-    public List<GameObject> gameObjectsToAdd;
     public List<Transform> moveToLocation;
-    public int groupCount;
-    public int targetCount;
     [HideInInspector]
+    public int groupCount;
+    [HideInInspector]
+    public int targetCount;
     public bool running;
+    [HideInInspector]
     public int countToNextSpawn;
     // Start is called before the first frame update
     void Start()
@@ -100,6 +101,10 @@ public class TargetManager : MonoBehaviour
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
                 }
             }
+            else
+            {
+                running = false;
+            }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         targets[gameObjects.IndexOf(target)].active = false;
@@ -123,23 +128,40 @@ public class TargetManager : MonoBehaviour
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
                 }
             }
+            else
+            {
+                running = false;
+            }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         targets[gameObjects.IndexOf(target)].active = false;
         return;
     }
-    private void InitialTarget()
+    public void InitialTarget()
     {
-        countToNextSpawn = numberToSpawn[groupCount];
-        groupCount++;
-        targetCount = -1;
-        for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+        if (!running)
         {
-            targetCount++;
-            int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
-            GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
-            gameObjects.Add(createdTarget);
-            targets[gameObjects.IndexOf(createdTarget)].active = true;
+            running = true;
+            if (gameObjects.Count > 0)
+            {
+                foreach (GameObject gameObj in gameObjects)
+                {
+                    Destroy(gameObj);
+                }
+                gameObjects.Clear();
+            }
+            groupCount = 0;
+            countToNextSpawn = numberToSpawn[groupCount];
+            groupCount++;
+            targetCount = -1;
+            for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+            {
+                targetCount++;
+                int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[targets[targetCount].nextPosition]);
+                GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
+                gameObjects.Add(createdTarget);
+                targets[gameObjects.IndexOf(createdTarget)].active = true;
+            }
         }
     }
 }
