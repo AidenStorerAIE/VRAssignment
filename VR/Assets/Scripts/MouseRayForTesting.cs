@@ -12,15 +12,13 @@ public class MouseRayForTesting : MonoBehaviour
     private TargetManager targetManager;
     public GameObject rHand;
     public LayerMask LM;
-    public TextMeshPro text;
-    int shots = 0;
     bool castHit;
 
     void Start()
     {
         playerInput = GetComponent<InputActionManager>();
         targetManager = FindObjectOfType<TargetManager>();
-        playerInput.actionAssets[0].FindAction("Test").performed += Fire;
+        playerInput.actionAssets[0].FindAction("Fire").performed += Fire;
     }
     void Fire(InputAction.CallbackContext context)
     {
@@ -32,15 +30,11 @@ public class MouseRayForTesting : MonoBehaviour
         {
             if(hit.collider.gameObject.tag == "TargetCollider")
             {
-                targetManager.DropTarget(hit.collider.transform.parent.gameObject);
+                targetManager.DropTarget(hit.collider.transform.parent.gameObject, 100);
             }
-            shots++;
-            text.text = ("You hit button no hit " + shots);
             //targetManager.DropTarget(setTarget);
         }
-
     }
-
 
     public void Active()
     {

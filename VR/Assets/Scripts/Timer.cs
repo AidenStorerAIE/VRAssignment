@@ -5,14 +5,16 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float minutes;
-    public float seconds;
+    public float startMinutes, startSeconds;
+    float minutes, seconds;
     bool active;
     public TextMeshPro timerText;
     public int secondsStringLength;
+    public TargetManager targetManager;
 
     private void Start()
     {
+        Reset();
         UpdateUI();
     }
 
@@ -24,16 +26,21 @@ public class Timer : MonoBehaviour
     public void Stop()
     {
         active = false;
+        for (int i = 0; i < targetManager.targetCount; i++)
+        {
+            targetManager.DropTarget(targetManager.gameObjects[i], 0); //0 score
+        }
+        targetManager.Stop();
+    }
+
+    public void Reset()
+    {
+        minutes = startMinutes;
+        seconds = startSeconds;
     }
 
     private void Update()
     {
-        //debugging
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Activate();
-        }
-
         if (!active)
             return;
 

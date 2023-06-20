@@ -16,68 +16,76 @@ public class TargetManager : MonoBehaviour
     public int targetCount;
     public bool running;
     [HideInInspector]
-    public int countToNextSpawn;
-    public XRInteractionManager interactionManager;
-    // Start is called before the first frame update
+    int countToNextSpawn;
+    public int startCountToNextSpawn;
+    XRInteractionManager interactionManager;
+    ScoreManager scoreManager;  
+
+    //debug
+    public bool active = true;
+
     void Start()
     {
-        InitialTarget();
+        interactionManager = FindObjectOfType<XRInteractionManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
+        active = true;
+        countToNextSpawn = startCountToNextSpawn;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (gameObjects.Count > 0)
+        if (gameObjects.Count <= 0 || !running)
+            return;
+
+        foreach (GameObject gameObject in gameObjects)
         {
-            foreach (GameObject gameObject in gameObjects)
+            if (targets[gameObjects.IndexOf(gameObject)].active == true)
             {
-                if (targets[gameObjects.IndexOf(gameObject)].active == true)
+                if (targets[gameObjects.IndexOf(gameObject)].locations.Count > 1)
                 {
-                    if (targets[gameObjects.IndexOf(gameObject)].locations.Count > 1)
+                    int locationValue = Convert.ToInt32(targets[gameObjects.IndexOf(gameObject)].locations[targets[gameObjects.IndexOf(gameObject)].nextPosition]);
+                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, moveToLocation[locationValue].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
+                    if (gameObject.transform.position == moveToLocation[locationValue].position)
                     {
-                        int locationValue = Convert.ToInt32(targets[gameObjects.IndexOf(gameObject)].locations[targets[gameObjects.IndexOf(gameObject)].nextPosition]);
-                        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, moveToLocation[locationValue].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
-                        if (gameObject.transform.position == moveToLocation[locationValue].position)
+                        if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].locations.Count)
                         {
-                            if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].locations.Count)
+                            targets[gameObjects.IndexOf(gameObject)].nextPosition += 1;
+                        }
+                        else
+                        {
+                            if (targets[gameObjects.IndexOf(gameObject)].currentLoop != targets[gameObjects.IndexOf(gameObject)].loopCount)
                             {
-                                targets[gameObjects.IndexOf(gameObject)].nextPosition += 1;
+                                targets[gameObjects.IndexOf(gameObject)].nextPosition = 0;
+                                targets[gameObjects.IndexOf(gameObject)].currentLoop += 1;
                             }
                             else
                             {
-                                if (targets[gameObjects.IndexOf(gameObject)].currentLoop != targets[gameObjects.IndexOf(gameObject)].loopCount)
-                                {
-                                    targets[gameObjects.IndexOf(gameObject)].nextPosition = 0;
-                                    targets[gameObjects.IndexOf(gameObject)].currentLoop += 1;
-                                }
-                                else
-                                {
-                                    targets[gameObjects.IndexOf(gameObject)].active = false;
-                                    LossTarget(gameObject);
-                                    return;
-                                }
+                                targets[gameObjects.IndexOf(gameObject)].active = false;
+                                DropTarget(gameObject, 0);
+                                return;
                             }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (targets[gameObjects.IndexOf(gameObject)].timing == false)
                     {
-                        if (targets[gameObjects.IndexOf(gameObject)].timing == false)
-                        {
-                            targets[gameObjects.IndexOf(gameObject)].startTime = Time.time;
-                            targets[gameObjects.IndexOf(gameObject)].timing = true;
-                            return;
-                        }
-                        if (Time.time > (targets[gameObjects.IndexOf(gameObject)].startTime + targets[gameObjects.IndexOf(gameObject)].lifeTime))
-                        {
-                            targets[gameObjects.IndexOf(gameObject)].active = false;
-                            targets[gameObjects.IndexOf(gameObject)].timing = false;
-                            LossTarget(gameObject);
-                            return;
-                        }
+                        targets[gameObjects.IndexOf(gameObject)].startTime = Time.time;
+                        targets[gameObjects.IndexOf(gameObject)].timing = true;
+                        return;
+                    }
+                    if (Time.time > (targets[gameObjects.IndexOf(gameObject)].startTime + targets[gameObjects.IndexOf(gameObject)].lifeTime))
+                    {
+                        targets[gameObjects.IndexOf(gameObject)].active = false;
+                        targets[gameObjects.IndexOf(gameObject)].timing = false;
+                        DropTarget(gameObject, 0);
+                        return;
                     }
                 }
             }
         }
+
     }
     [Serializable]
     public struct Target
@@ -110,12 +118,13 @@ public class TargetManager : MonoBehaviour
         C2,
         C3,
     }
-    private void LossTarget(GameObject target)
+
+    public void DropTarget(GameObject target, int score)
     {
         countToNextSpawn--;
         if (countToNextSpawn <= 0)
         {
-            if (groupCount < numberToSpawn.Count)
+            if (groupCount < numberToSpawn.Count && running)
             {
                 countToNextSpawn = numberToSpawn[groupCount];
                 groupCount++;
@@ -128,50 +137,23 @@ public class TargetManager : MonoBehaviour
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
                     targets[gameObjects.IndexOf(createdTarget)].timing = false;
                     createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
+                    scoreManager.AddScore(score);
                 }
             }
             else
             {
-                running = false;
+                Stop();
+                //running = false;
                 //REMOVE THIS TO SETUP RESET
-                InitialTarget();
+                //End of Round
+                //InitialTarget();
             }
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         targets[gameObjects.IndexOf(target)].active = false;
         return;
     }
-    public void DropTarget(GameObject target)
-    {
-        countToNextSpawn--;
-        if (countToNextSpawn <= 0)
-        {
-            if (groupCount < numberToSpawn.Count)
-            {
-                countToNextSpawn = numberToSpawn[groupCount];
-                groupCount++;
-                for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
-                {
-                    targetCount++;
-                    int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[0]);
-                    GameObject createdTarget = Instantiate(targets[targetCount].target, moveToLocation[initialLocationValue].position, Quaternion.identity);
-                    gameObjects.Add(createdTarget);
-                    targets[gameObjects.IndexOf(createdTarget)].active = true;
-                    targets[gameObjects.IndexOf(createdTarget)].timing = false;
-                    createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
-                }
-            }
-            else
-            {
-                running = false;
-                //REMOVE THIS TO SETUP RESET
-                InitialTarget();
-            }
-        }
-        target.GetComponent<Animator>().SetTrigger("TargetDrop");
-        targets[gameObjects.IndexOf(target)].active = false;
-        return;
-    }
+    //Start of round
     public void InitialTarget()
     {
         if (!running)
@@ -199,6 +181,21 @@ public class TargetManager : MonoBehaviour
                 targets[gameObjects.IndexOf(createdTarget)].timing = false;
                 createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
             }
+        }
+    }
+
+    public void Reset()
+    {
+        active = true;
+        countToNextSpawn = startCountToNextSpawn;
+    }
+
+    public void Stop()
+    {
+        foreach (GameObject target in gameObjects)
+        {
+            running = false;
+            DropTarget(target, 0);
         }
     }
 }
