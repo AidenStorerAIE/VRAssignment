@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 32e70b3186774244da25ce7746c6b0da, type: 2}
+  - {fileID: 2100000, guid: 76f6287735ce21144bbca8d289168365, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +236,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 32e70b3186774244da25ce7746c6b0da, type: 2}
+  - {fileID: 2100000, guid: 76f6287735ce21144bbca8d289168365, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,10 +282,10 @@ GameObject:
   - component: {fileID: 5112012667147916494}
   - component: {fileID: 1504080459011342822}
   - component: {fileID: 3786328441263493423}
-  - component: {fileID: 215500862538172703}
+  - component: {fileID: 1224126546354501715}
   m_Layer: 0
-  m_Name: TargetParent
-  m_TagString: Untagged
+  m_Name: BadTarget
+  m_TagString: BadTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &215500862538172703
+--- !u!114 &1224126546354501715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,4 +418,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109cca5edd9c0134d99241a5c756b96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 100
+  score: -100

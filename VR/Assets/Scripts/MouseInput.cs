@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 using TMPro;
+using Unity.VisualScripting;
 
 public class MouseInput : MonoBehaviour
 {
     private PlayerInput playerInput;
     public GameObject setTarget;
-    private TargetManager targetManager;
+    private TargetManagerVarient targetManagerVarient;
     // Start is called before the first frame update
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        targetManager = FindObjectOfType<TargetManager>();
+        targetManagerVarient = FindObjectOfType<TargetManagerVarient>();
         playerInput.actions["Click"].performed += TestFire;
         playerInput.actions["Reset"].performed += Reset;
     }
@@ -42,13 +43,13 @@ public class MouseInput : MonoBehaviour
     }
     private void TestFire(InputAction.CallbackContext context)
     {
-        if (setTarget != null && targetManager.targets[targetManager.gameObjects.IndexOf(setTarget.gameObject)].active == true)
+        if (setTarget != null)
         {
-            targetManager.DropTarget(setTarget, 100);
+            targetManagerVarient.DropTarget(setTarget, setTarget.GetComponent<Target>().score);
         }
     }
     private void Reset(InputAction.CallbackContext context)
     {
-        targetManager.Stop();
+        targetManagerVarient.Stop();
     }
 }
