@@ -142,8 +142,8 @@ public class TargetManager : MonoBehaviour
             }
             else
             {
-                Stop();
-                //running = false;
+                //Stop();
+                running = false;
                 //REMOVE THIS TO SETUP RESET
                 //End of Round
                 //InitialTarget();
@@ -186,8 +186,9 @@ public class TargetManager : MonoBehaviour
 
     public void Reset()
     {
+        Stop();
         active = true;
-        countToNextSpawn = startCountToNextSpawn;
+        //countToNextSpawn = startCountToNextSpawn;
     }
 
     public void Stop()

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6540488758310200336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BodyPivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8496393735817721337}
   - component: {fileID: 1159366643909956468}
   - component: {fileID: 5867801387082797740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TargetBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4481506895741700470}
   - component: {fileID: 8113383240720794656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: TargetCollider
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 8961153912713171077}
   - component: {fileID: 1214548685111305746}
   - component: {fileID: 389925574881438190}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TargetBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 5112012667147916494}
   - component: {fileID: 1504080459011342822}
   - component: {fileID: 3786328441263493423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TargetParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
