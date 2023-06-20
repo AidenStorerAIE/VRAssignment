@@ -278,6 +278,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "40d17c06-b9e1-46f5-8f0f-d5eca11721b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -456,6 +465,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c3f7c5cc-0286-4677-a68e-1f7884ee92d5",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -545,23 +565,23 @@
                 },
                 {
                     "name": "",
-                    "id": "99cb7ad1-51ec-4611-af68-92a85f2c17d6",
-                    "path": "<XRController>{LeftHand}/Primary2DAxis",
-                    "interactions": "Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)",
-                    "processors": "",
-                    "groups": "Noncontinuous Move",
-                    "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8e383b1a-270f-4c20-819b-89a59cffb498",
                     "path": "<XRController>{LeftHand}/Primary2DAxis",
                     "interactions": "",
                     "processors": "StickDeadzone",
                     "groups": "Continuous Move",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acc11ace-8729-49ae-a892-e03314693f85",
+                    "path": "<XRController>{LeftHand}/primary2DAxis",
+                    "interactions": "Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -811,7 +831,7 @@
                 {
                     "name": "",
                     "id": "1ce80054-410d-4112-a332-50faa7fb4f23",
-                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "path": "<XRController>{RightHand}/gripPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -986,11 +1006,11 @@
                 },
                 {
                     "name": "",
-                    "id": "d78e70fc-e629-48a8-871b-04c8ae43d955",
+                    "id": "fb7f8000-28c8-405a-8bd3-f4e75d454198",
                     "path": "<XRController>{RightHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1078,17 +1098,6 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Teleport Mode Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d6c08c3d-3d41-4695-994d-1ac9016a5a9e",
-                    "path": "<XRController>{RightHand}/Primary2DAxis",
-                    "interactions": "Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)",
-                    "processors": "",
-                    "groups": "Generic XR Controller",
-                    "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

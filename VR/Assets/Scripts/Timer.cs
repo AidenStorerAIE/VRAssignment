@@ -26,10 +26,10 @@ public class Timer : MonoBehaviour
     public void Stop()
     {
         active = false;
-        for (int i = 0; i < targetManager.targetCount; i++)
-        {
-            targetManager.DropTarget(targetManager.gameObjects[i], 0); //0 score
-        }
+        //for (int i = 0; i < targetManager.targetCount; i++)
+        //{
+        //    targetManager.DropTarget(targetManager.gameObjects[i], 0); //0 score
+        //}
         targetManager.Stop();
     }
 
@@ -37,6 +37,8 @@ public class Timer : MonoBehaviour
     {
         minutes = startMinutes;
         seconds = startSeconds;
+        UpdateUI();
+        Stop();
     }
 
     private void Update()
