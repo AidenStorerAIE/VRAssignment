@@ -117,6 +117,9 @@ public class TargetManager : MonoBehaviour
         C1,
         C2,
         C3,
+        D1,
+        D2,
+        D3,
     }
 
     public void DropTarget(GameObject target, int score)
