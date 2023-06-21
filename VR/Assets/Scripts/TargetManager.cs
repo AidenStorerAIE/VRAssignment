@@ -121,7 +121,12 @@ public class TargetManager : MonoBehaviour
 
     public void DropTarget(GameObject target, int score)
     {
-        countToNextSpawn--;
+        if (target.gameObject.tag != "BadTarget")
+        {
+            countToNextSpawn--;
+        }
+        target.GetComponent<Animator>().SetTrigger("TargetDrop");
+        targets[gameObjects.IndexOf(target)].active = false;
         if (countToNextSpawn <= 0)
         {
             if (groupCount < numberToSpawn.Count && running)
@@ -142,15 +147,14 @@ public class TargetManager : MonoBehaviour
             }
             else
             {
-                //Stop();
+                ClearTargets();
                 running = false;
+                return;
                 //REMOVE THIS TO SETUP RESET
                 //End of Round
                 //InitialTarget();
             }
         }
-        target.GetComponent<Animator>().SetTrigger("TargetDrop");
-        targets[gameObjects.IndexOf(target)].active = false;
         return;
     }
     //Start of round
@@ -180,6 +184,10 @@ public class TargetManager : MonoBehaviour
                 targets[gameObjects.IndexOf(createdTarget)].active = true;
                 targets[gameObjects.IndexOf(createdTarget)].timing = false;
                 createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
+                if (createdTarget.tag == "BadTarget")
+                {
+                    countToNextSpawn--;
+                }
             }
         }
     }
@@ -197,6 +205,14 @@ public class TargetManager : MonoBehaviour
         {
             running = false;
             DropTarget(target, 0);
+        }
+    }
+    public void ClearTargets()
+    {
+        foreach (GameObject target in gameObjects)
+        {
+            target.GetComponent<Animator>().SetTrigger("TargetDrop");
+            targets[gameObjects.IndexOf(target)].active = false;
         }
     }
 }
