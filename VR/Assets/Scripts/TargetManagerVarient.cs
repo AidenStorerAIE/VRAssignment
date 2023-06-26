@@ -9,7 +9,6 @@ public class TargetManagerVarient : MonoBehaviour
     public Target[] targets;
     public List<int> numberToSpawn;
     public List<GameObject> gameObjects;
-    public List<GameObject> badTargets;
     public List<Transform> moveToLocation;
     [HideInInspector]
     public int groupCount;
