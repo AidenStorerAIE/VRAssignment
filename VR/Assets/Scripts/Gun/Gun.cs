@@ -67,19 +67,17 @@ public class Gun : MonoBehaviour
             if (equipped)
                 return;
 
-            //transform.position = transform.parent.transform.position;
             rb.useGravity = false;
-            //anim.enabled = true;
 ;
             equipped = true;
             ammoText.gameObject.SetActive(true);
 
             GetComponent<XRGrabInteractable>().enabled = false;
             interactor.enabled = false;
+            //transform.localRotation = new Quaternion(0,0,0,0);
         }
         else
         {
-            //testText.text = ("NoGrab");
             equipped = false;
             //anim.enabled = false;
             transform.parent = null;
@@ -112,7 +110,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
-                targetManager.DropTarget(hit.collider.transform.parent.gameObject, 100);
+                targetManager.DropTarget(hit.collider.transform.parent.gameObject, 0);
             }
         }
     }
@@ -141,8 +139,6 @@ public class Gun : MonoBehaviour
         {
             return;
         }
-
-        
 
         if(curAmmo != maxAmmo)
         {

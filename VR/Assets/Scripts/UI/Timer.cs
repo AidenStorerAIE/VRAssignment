@@ -20,7 +20,14 @@ public class Timer : MonoBehaviour
 
     public void Activate()
     {
+        if (active)
+            return;
+
+
         active = true;
+
+        minutes = startMinutes;
+        seconds = startSeconds;
     }
 
     public void Stop()
