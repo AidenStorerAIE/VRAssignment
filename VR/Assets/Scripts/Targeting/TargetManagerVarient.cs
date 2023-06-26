@@ -198,6 +198,7 @@ public class TargetManagerVarient : MonoBehaviour
                     countToNextSpawn--;
                 }
             }
+            return;
         }
     }
 

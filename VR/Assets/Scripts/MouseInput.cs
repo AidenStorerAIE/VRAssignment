@@ -50,6 +50,7 @@ public class MouseInput : MonoBehaviour
     }
     private void Reset(InputAction.CallbackContext context)
     {
-        targetManagerVarient.Stop();
+        //targetManagerVarient.Stop();
+        targetManagerVarient.InitialTarget();
     }
 }
