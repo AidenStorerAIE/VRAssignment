@@ -14,7 +14,10 @@ public class MouseRayForTesting : MonoBehaviour
     {
         playerInput = GetComponent<InputActionManager>();
         playerInput.actionAssets[0].FindAction("Fire").performed += Fire;
+        //playerInput.actionAssets[0].FindAction("Fire").performed += Fire;
         playerInput.actionAssets[0].FindAction("Drop").performed += DropMagazine;
+        playerInput.actionAssets[0].FindAction("SwapL").performed += Swap;
+        playerInput.actionAssets[0].FindAction("SwapR").performed += Swap;
     }
     void Fire(InputAction.CallbackContext context)
     {
@@ -24,6 +27,11 @@ public class MouseRayForTesting : MonoBehaviour
     void DropMagazine(InputAction.CallbackContext context)
     {
         Gun.DropMagazine();
+    }
+
+    void Swap(InputAction.CallbackContext context)
+    {
+        Gun.Swap();
     }
 
     //public void Active()

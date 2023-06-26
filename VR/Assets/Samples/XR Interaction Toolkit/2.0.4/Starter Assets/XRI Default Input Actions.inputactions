@@ -280,7 +280,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Test",
+                    "name": "SwapL",
                     "type": "Button",
                     "id": "40d17c06-b9e1-46f5-8f0f-d5eca11721b6",
                     "expectedControlType": "Button",
@@ -473,7 +473,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Test",
+                    "action": "SwapL",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -834,13 +834,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwapR",
+                    "type": "Button",
+                    "id": "36915ed3-488f-4ea2-a26d-25f07f3ce49b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "1ce80054-410d-4112-a332-50faa7fb4f23",
-                    "path": "<XRController>{RightHand}/gripPressed",
+                    "path": "<XRController>{RightHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -1032,6 +1041,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68e7e28b-2b60-423d-a1f8-76d4596458f5",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

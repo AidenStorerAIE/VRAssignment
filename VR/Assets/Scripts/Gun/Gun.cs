@@ -16,7 +16,9 @@ public class Gun : MonoBehaviour
     Rigidbody rb;
     Animator anim;
     public TextMeshPro ammoText;
-    public Transform attachPoint;
+    Transform curParent;
+    public Transform attachPointL;
+    public Transform attachPointR;
     public GameObject magPrefab;
     public Transform dropPoint;
     public Collider reloadSpace;
@@ -25,7 +27,7 @@ public class Gun : MonoBehaviour
     bool equipped;
     public int maxAmmo;
     int curAmmo;
-    bool loaded;
+    bool loaded = true;
 
     [Header("Timers")]
     public float fireCooldown;
@@ -34,10 +36,11 @@ public class Gun : MonoBehaviour
     float reloadTimer;
 
     [Header("Debugging")]
+    public GameObject lHand;
     public GameObject rHand;
     public XRRayInteractor interactor;
     public bool unlimitedAmmo;
-    //public GameObject lHand;
+
 
     void Start()
     {
@@ -55,11 +58,11 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-
-        if(Vector3.Distance(transform.position, rHand.transform.position) < 1f /*|| 
-            Vector3.Distance(transform.position, lHand.transform.position) < 0.5f*/)
+        if(Vector3.Distance(transform.position, rHand.transform.position) < 1f 
+            //|| Vector3.Distance(transform.position, lHand.transform.position) < 0.5f
+            )
         {
-            transform.parent = attachPoint;
+            transform.parent = curParent;
 
             if (transform.parent != null)
             transform.localPosition = Vector3.zero;
@@ -67,23 +70,39 @@ public class Gun : MonoBehaviour
             if (equipped)
                 return;
 
-            //transform.position = transform.parent.transform.position;
-            rb.useGravity = false;
-            //anim.enabled = true;
-;
-            equipped = true;
+            //inital equip
+            curParent = attachPointR;    //change later
             ammoText.gameObject.SetActive(true);
 
+            rb.useGravity = false;
+            equipped = true;
+
             GetComponent<XRGrabInteractable>().enabled = false;
-            interactor.enabled = false;
+            //interactor.enabled = false;
+            //transform.localRotation = transform.parent.rotation;
         }
         else
         {
-            //testText.text = ("NoGrab");
             equipped = false;
             //anim.enabled = false;
             transform.parent = null;
         }
+    }
+
+    public void Swap()
+    {
+        if (curParent = attachPointR)
+        {
+            curParent = attachPointL;
+        }
+        else
+        {
+            curParent = attachPointR;
+        }
+        transform.parent = curParent;
+        transform.localPosition = Vector3.zero;
+
+        //interactor.enabled = false;
     }
 
     public void Fire()
@@ -112,7 +131,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
-                targetManager.DropTarget(hit.collider.transform.parent.gameObject, 100);
+                targetManager.DropTarget(hit.collider.transform.parent.gameObject, true);
             }
         }
     }
@@ -141,8 +160,6 @@ public class Gun : MonoBehaviour
         {
             return;
         }
-
-        
 
         if(curAmmo != maxAmmo)
         {
