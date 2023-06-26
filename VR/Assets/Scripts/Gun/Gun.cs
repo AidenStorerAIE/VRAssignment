@@ -110,7 +110,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
-                targetManager.DropTarget(hit.collider.transform.parent.gameObject, 0);
+                targetManager.DropTarget(hit.collider.transform.parent.gameObject, true);
             }
         }
     }

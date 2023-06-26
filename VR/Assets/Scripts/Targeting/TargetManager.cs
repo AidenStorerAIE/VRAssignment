@@ -61,7 +61,7 @@ public class TargetManager : MonoBehaviour
                             else
                             {
                                 targets[gameObjects.IndexOf(gameObject)].active = false;
-                                DropTarget(gameObject, 0);
+                                DropTarget(gameObject, true);
                                 return;
                             }
                         }
@@ -79,7 +79,7 @@ public class TargetManager : MonoBehaviour
                     {
                         targets[gameObjects.IndexOf(gameObject)].active = false;
                         targets[gameObjects.IndexOf(gameObject)].timing = false;
-                        DropTarget(gameObject, 0);
+                        DropTarget(gameObject, true);
                         return;
                     }
                 }
@@ -122,14 +122,17 @@ public class TargetManager : MonoBehaviour
         D3,
     }
 
-    public void DropTarget(GameObject target, int score)
+    //if target is shot
+    public void DropTarget(GameObject target, bool addScore)
     {
+        
         if (target.gameObject.tag != "BadTarget")
         {
             countToNextSpawn--;
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         targets[gameObjects.IndexOf(target)].active = false;
+
         if (countToNextSpawn <= 0)
         {
             if (groupCount < numberToSpawn.Count && running)
@@ -150,8 +153,6 @@ public class TargetManager : MonoBehaviour
                     {
                         countToNextSpawn--;
                     }
-                    score = target.GetComponent<TargetObj>().score;
-                    scoreManager.AddScore(score);
                 }
             }
             else
@@ -159,14 +160,13 @@ public class TargetManager : MonoBehaviour
                 ClearTargets();
                 running = false;
                 return;
-                //REMOVE THIS TO SETUP RESET
-                //End of Round
-                //InitialTarget();
             }
         }
-        return;
+
+        int score = target.GetComponent<TargetObj>().score;
+        if (addScore) scoreManager.AddScore(score);
     }
-    //Start of round
+
     public void InitialTarget()
     {
         if (!running)
@@ -213,7 +213,7 @@ public class TargetManager : MonoBehaviour
         foreach (GameObject target in gameObjects)
         {
             running = false;
-            DropTarget(target, 0);
+            DropTarget(target, false);
         }
     }
     public void ClearTargets()

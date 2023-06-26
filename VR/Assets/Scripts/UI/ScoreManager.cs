@@ -14,12 +14,6 @@ public class ScoreManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void Reset()
-    {
-        score = 0;
-        UpdateUI();
-    }
-
     void UpdateUI()
     {
         scoreText.text = ("Score: " + score.ToString());
