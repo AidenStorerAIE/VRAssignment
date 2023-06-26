@@ -176,6 +176,8 @@ public class TargetManager : MonoBehaviour
             {
                 foreach (GameObject gameObj in gameObjects)
                 {
+                    targets[gameObjects.IndexOf(gameObj)].nextPosition = 0;
+                    targets[gameObjects.IndexOf(gameObj)].currentLoop = 0;
                     Destroy(gameObj);
                 }
                 gameObjects.Clear();
