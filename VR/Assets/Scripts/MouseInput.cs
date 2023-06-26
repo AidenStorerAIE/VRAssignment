@@ -45,7 +45,7 @@ public class MouseInput : MonoBehaviour
     {
         if (setTarget != null)
         {
-            targetManagerVarient.DropTarget(setTarget, setTarget.GetComponent<Target>().score);
+            targetManagerVarient.DropTarget(setTarget, setTarget.GetComponent<TargetObj>().score);
         }
     }
     private void Reset(InputAction.CallbackContext context)

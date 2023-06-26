@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
-
-//debugging
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
@@ -17,54 +15,67 @@ public class Gun : MonoBehaviour
     public TargetManager targetManager;
     Rigidbody rb;
     Animator anim;
+    public TextMeshPro ammoText;
+    public Transform attachPoint;
+    public GameObject magPrefab;
+    public Transform dropPoint;
+    public Collider reloadSpace;
 
     [Header("Stats")]
+    bool equipped;
+    public int maxAmmo;
+    int curAmmo;
+    bool loaded;
+
+    [Header("Timers")]
     public float fireCooldown;
     float fireTimer;
+    public float reloadCooldown;
+    float reloadTimer;
 
-    //debugging
+    [Header("Debugging")]
     public GameObject rHand;
+    public XRRayInteractor interactor;
+    public bool unlimitedAmmo;
     //public GameObject lHand;
-    public Transform attachPoint;
-    public TextMeshPro testText;
-    bool equipped;
-
 
     void Start()
     {
+        //gets
         playerInput = GetComponent<InputActionManager>();
         targetManager = FindObjectOfType<TargetManager>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        //playerInput.actionAssets[0].FindAction("Fire").performed += Fire;
 
-        //playerInput.actionAssets[0].FindAction("Test").performed += Fire;
+        //ammo setting
+        curAmmo = maxAmmo;
+        UpdateUI();
+        loaded = true;
     }
 
     private void Update()
     {
 
-        if(Vector3.Distance(transform.position, rHand.transform.position) < 1.2 /*|| 
+        if(Vector3.Distance(transform.position, rHand.transform.position) < 1f /*|| 
             Vector3.Distance(transform.position, lHand.transform.position) < 0.5f*/)
         {
             transform.parent = attachPoint;
 
-
             if (transform.parent != null)
             transform.localPosition = Vector3.zero;
-
-
+            
             if (equipped)
                 return;
-
-
 
             //transform.position = transform.parent.transform.position;
             rb.useGravity = false;
             //anim.enabled = true;
-
-            testText.text = ("Grab");
+;
             equipped = true;
+            ammoText.gameObject.SetActive(true);
+
+            GetComponent<XRGrabInteractable>().enabled = false;
+            interactor.enabled = false;
         }
         else
         {
@@ -83,22 +94,70 @@ public class Gun : MonoBehaviour
         if (Time.time - fireTimer < fireCooldown)
             return;
 
-        testText.text = ("FIre");
+        if (curAmmo == 0)
+        {
+            return;
+        }
+
+        if (!unlimitedAmmo)
+            curAmmo--;
+
+        UpdateUI();
         anim.SetTrigger("Fire");
         fireTimer = Time.time;
-
-        
-
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
         {
+
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
                 targetManager.DropTarget(hit.collider.transform.parent.gameObject, 100);
-
             }
-            testText.text = ("FIreHit");
         }
+    }
+
+    public void DropMagazine()
+    {
+
+        if (!loaded || !equipped)
+            return;
+
+        loaded = false;
+        Magazine mag = Instantiate(magPrefab, dropPoint).GetComponent<Magazine>();
+        mag.transform.parent = null;
+        mag.ammoCount = curAmmo;
+
+        curAmmo = 0;
+        UpdateUI();
+
+        reloadTimer = Time.time;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Magazine mag = other.GetComponent<Magazine>();
+        if (!mag || loaded)
+        {
+            return;
+        }
+
+        
+
+        if(curAmmo != maxAmmo)
+        {
+            if (Time.time - reloadTimer > reloadCooldown)
+            {
+                curAmmo = mag.ammoCount;
+                UpdateUI();
+                loaded = true;
+                Destroy(mag.gameObject);
+            }
+        }
+    }
+
+    void UpdateUI()
+    {
+        ammoText.text = (curAmmo + "/" + maxAmmo);
     }
 }

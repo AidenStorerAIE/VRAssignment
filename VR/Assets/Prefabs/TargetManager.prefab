@@ -301,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8114979863412067627}
   - component: {fileID: 1935844640}
+  - component: {fileID: 3654519398440182252}
   m_Layer: 0
   m_Name: TargetManager
   m_TagString: Untagged
@@ -331,7 +332,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8114979863412067541}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72bced0495bdc4e48b73dfaf4368e0ee, type: 3}
   m_Name: 
@@ -460,6 +461,146 @@ MonoBehaviour:
   - {fileID: 8114979863352094118}
   - {fileID: 8114979862056689086}
   - {fileID: 8114979863621024914}
+  groupCount: 0
+  targetCount: 0
+  running: 0
+  startCountToNextSpawn: 0
+  active: 1
+--- !u!114 &3654519398440182252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8114979863412067541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5667931d46de1e4d878bc0efe0dc5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 04000000
+    loopCount: 0
+    speed: 0
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: 6d4a272a23f5c8f49b212bf458eaebad, type: 3}
+    locations: 07000000
+    loopCount: 0
+    speed: 0
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 03000000
+    loopCount: 0
+    speed: 0
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 05000000
+    loopCount: 0
+    speed: 0
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 06000000
+    loopCount: 0
+    speed: 0
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 08000000
+    loopCount: 0
+    speed: 0
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: 6d4a272a23f5c8f49b212bf458eaebad, type: 3}
+    locations: 050000000400000003000000
+    loopCount: 10
+    speed: 5
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: 6d4a272a23f5c8f49b212bf458eaebad, type: 3}
+    locations: 03000000
+    loopCount: 10
+    speed: 5
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: 6d4a272a23f5c8f49b212bf458eaebad, type: 3}
+    locations: 04000000
+    loopCount: 10
+    speed: 5
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: 6d4a272a23f5c8f49b212bf458eaebad, type: 3}
+    locations: 05000000
+    loopCount: 10
+    speed: 5
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 080000000700000006000000
+    loopCount: 3
+    speed: 5
+    lifeTime: 10
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 0
+    active: 0
+  numberToSpawn: 01000000030000000300000004000000
+  gameObjects: []
+  moveToLocation:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   groupCount: 0
   targetCount: 0
   running: 0
