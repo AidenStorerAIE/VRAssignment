@@ -16,7 +16,7 @@ public class TargetManagerVarient : MonoBehaviour
     public int targetCount;
     public bool running;
     [HideInInspector]
-    int countToNextSpawn;
+    public int countToNextSpawn;
     public int startCountToNextSpawn;
     XRInteractionManager interactionManager;
     ScoreManager scoreManager;  
@@ -133,12 +133,12 @@ public class TargetManagerVarient : MonoBehaviour
         targets[gameObjects.IndexOf(target)].active = false;
         if (countToNextSpawn <= 0)
         {
-            if (groupCount < numberToSpawn.Count && running)
+            if (groupCount + 1 < numberToSpawn.Count && running)
             {
                 ClearTargets();
-                countToNextSpawn = numberToSpawn[groupCount];
                 groupCount++;
-                for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+                countToNextSpawn = numberToSpawn[groupCount];
+                for (int i = 0; i < numberToSpawn[groupCount]; i++)
                 {
                     targetCount++;
                     int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[0]);
@@ -176,15 +176,16 @@ public class TargetManagerVarient : MonoBehaviour
             {
                 foreach (GameObject gameObj in gameObjects)
                 {
+                    targets[gameObjects.IndexOf(gameObj)].nextPosition = 0;
+                    targets[gameObjects.IndexOf(gameObj)].currentLoop = 0;
                     Destroy(gameObj);
                 }
                 gameObjects.Clear();
             }
             groupCount = 0;
             countToNextSpawn = numberToSpawn[groupCount];
-            groupCount++;
             targetCount = -1;
-            for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
+            for (int i = 0; i < numberToSpawn[groupCount]; i++)
             {
                 targetCount++;
                 int initialLocationValue = Convert.ToInt32(targets[targetCount].locations[0]);
@@ -198,7 +199,7 @@ public class TargetManagerVarient : MonoBehaviour
                     countToNextSpawn--;
                 }
             }
-            return;
+            //return;
         }
     }
 
