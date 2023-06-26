@@ -8,31 +8,30 @@ using TMPro;
 public class MouseRayForTesting : MonoBehaviour
 {
     public InputActionManager playerInput;
-    //public GameObject setTarget;
-    private TargetManager targetManager;
-    public GameObject rHand;
-    public TextMeshPro testText;
-    public LayerMask LM;
-    bool castHit;
     public Gun Gun;
 
     void Start()
     {
         playerInput = GetComponent<InputActionManager>();
-        targetManager = FindObjectOfType<TargetManager>();
         playerInput.actionAssets[0].FindAction("Fire").performed += Fire;
+        playerInput.actionAssets[0].FindAction("Drop").performed += DropMagazine;
     }
     void Fire(InputAction.CallbackContext context)
     {
         Gun.Fire();
+    }    
+
+    void DropMagazine(InputAction.CallbackContext context)
+    {
+        Gun.DropMagazine();
     }
 
-    public void Active()
-    {
-        castHit = true;
-    }
-    public void Inactive()
-    {
-        castHit = false;
-    }
+    //public void Active()
+    //{
+    //    castHit = true;
+    //}
+    //public void Inactive()
+    //{
+    //    castHit = false;
+    //}
 }

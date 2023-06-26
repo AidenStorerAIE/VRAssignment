@@ -134,6 +134,7 @@ public class TargetManager : MonoBehaviour
         {
             if (groupCount < numberToSpawn.Count && running)
             {
+                ClearTargets();
                 countToNextSpawn = numberToSpawn[groupCount];
                 groupCount++;
                 for (int i = 0; i < numberToSpawn[groupCount - 1]; i++)
@@ -145,6 +146,11 @@ public class TargetManager : MonoBehaviour
                     targets[gameObjects.IndexOf(createdTarget)].active = true;
                     targets[gameObjects.IndexOf(createdTarget)].timing = false;
                     createdTarget.GetComponent<XRSimpleInteractable>().interactionManager = interactionManager;
+                    if (createdTarget.tag == "BadTarget")
+                    {
+                        countToNextSpawn--;
+                    }
+                    score = target.GetComponent<TargetObj>().score;
                     scoreManager.AddScore(score);
                 }
             }
