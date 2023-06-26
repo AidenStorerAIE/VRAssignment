@@ -30,7 +30,6 @@ public class TargetManagerVarient : MonoBehaviour
         scoreManager = FindObjectOfType<ScoreManager>();
         active = true;
         countToNextSpawn = startCountToNextSpawn;
-        InitialTarget();
     }
 
     void Update()
@@ -130,6 +129,7 @@ public class TargetManagerVarient : MonoBehaviour
             countToNextSpawn--;
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
+        target.GetComponent<AudioSource>().Play();
         targets[gameObjects.IndexOf(target)].active = false;
         if (countToNextSpawn <= 0)
         {

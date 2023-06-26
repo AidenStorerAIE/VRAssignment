@@ -11,11 +11,15 @@ public class MouseInput : MonoBehaviour
     private PlayerInput playerInput;
     public GameObject setTarget;
     private TargetManagerVarient targetManagerVarient;
+    public List<AudioClip> gunshots;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         targetManagerVarient = FindObjectOfType<TargetManagerVarient>();
+        audioSource = GetComponent<AudioSource>();
         playerInput.actions["Click"].performed += TestFire;
         playerInput.actions["Reset"].performed += Reset;
     }
@@ -43,6 +47,9 @@ public class MouseInput : MonoBehaviour
     }
     private void TestFire(InputAction.CallbackContext context)
     {
+        int rando = Random.Range(0, gunshots.Count);
+        audioSource.clip = gunshots[rando];
+        audioSource.Play();
         if (setTarget != null)
         {
             targetManagerVarient.DropTarget(setTarget, setTarget.GetComponent<TargetObj>().score);
