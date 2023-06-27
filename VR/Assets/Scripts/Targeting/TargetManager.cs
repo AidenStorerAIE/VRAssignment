@@ -19,7 +19,8 @@ public class TargetManager : MonoBehaviour
     int countToNextSpawn;
     public int startCountToNextSpawn;
     XRInteractionManager interactionManager;
-    ScoreManager scoreManager;  
+    ScoreManager scoreManager;
+    AudioSource audioSource;
 
     //debug
     public bool active = true;
@@ -28,6 +29,7 @@ public class TargetManager : MonoBehaviour
     {
         interactionManager = FindObjectOfType<XRInteractionManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
+        audioSource = GetComponent<AudioSource>();
         active = true;
         countToNextSpawn = startCountToNextSpawn;
     }
@@ -61,6 +63,7 @@ public class TargetManager : MonoBehaviour
                             else
                             {
                                 targets[gameObjects.IndexOf(gameObject)].active = false;
+                                gameObject.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
                                 DropTarget(gameObject, true);
                                 return;
                             }
@@ -79,6 +82,7 @@ public class TargetManager : MonoBehaviour
                     {
                         targets[gameObjects.IndexOf(gameObject)].active = false;
                         targets[gameObjects.IndexOf(gameObject)].timing = false;
+                        gameObject.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
                         DropTarget(gameObject, true);
                         return;
                     }
@@ -131,6 +135,8 @@ public class TargetManager : MonoBehaviour
             countToNextSpawn--;
         }
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
+        target.GetComponent<TargetObj>().audioSourceOne.Play();
+        target.GetComponent<TargetObj>().audioSourceTwo.Play();
         targets[gameObjects.IndexOf(target)].active = false;
 
         if (countToNextSpawn <= 0)
@@ -154,11 +160,13 @@ public class TargetManager : MonoBehaviour
                         countToNextSpawn--;
                     }
                 }
+                CheckIfMoving();
             }
             else
             {
                 ClearTargets();
                 running = false;
+                CheckIfMoving();
                 return;
             }
         }
@@ -200,6 +208,7 @@ public class TargetManager : MonoBehaviour
                     countToNextSpawn--;
                 }
             }
+            CheckIfMoving();
         }
     }
 
@@ -222,8 +231,25 @@ public class TargetManager : MonoBehaviour
     {
         foreach (GameObject target in gameObjects)
         {
+            if (targets[gameObjects.IndexOf(target)].active == true)
+            {
+                target.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
+            }
             target.GetComponent<Animator>().SetTrigger("TargetDrop");
             targets[gameObjects.IndexOf(target)].active = false;
         }
+    }
+    private void CheckIfMoving()
+    {
+        foreach (GameObject go in gameObjects)
+        {
+            if (targets[gameObjects.IndexOf(go)].active == true && targets[gameObjects.IndexOf(go)].locations.Count > 1)
+            {
+                audioSource.Play();
+                return;
+            }
+        }
+        audioSource.Stop();
+        return;
     }
 }

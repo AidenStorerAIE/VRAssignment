@@ -6,16 +6,17 @@ public class TargetObj : MonoBehaviour
 {
     public int score;
     public List<AudioClip> sounds;
-    private AudioSource AudioSource;
+    public AudioSource audioSourceOne;
+    public AudioSource audioSourceTwo;
 
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource = GetComponent<AudioSource>();
+        audioSourceOne = GetComponent<AudioSource>();
         if (sounds.Count > 0)
         {
             int rando = Random.Range(0, sounds.Count);
-            AudioSource.clip = sounds[rando];
+            audioSourceOne.clip = sounds[rando];
         }
     }
 
