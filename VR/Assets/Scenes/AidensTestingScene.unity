@@ -1735,7 +1735,7 @@ MonoBehaviour:
     timing: 0
     startTime: 7.093959
     active: 0
-  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+  - target: {fileID: 8712360513235835851, guid: bb4ae9c9d0c43b14380a783fb7d25ce7, type: 3}
     locations: 0b000000
     loopCount: 2
     speed: 7.5
@@ -1745,7 +1745,97 @@ MonoBehaviour:
     timing: 0
     startTime: 7.093959
     active: 0
-  numberToSpawn: 010000000300000003000000040000000100000008000000090000000900000001000000010000000100000003000000030000000300000003000000
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0b0000000a00000009000000060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 12
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0a00000009000000060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 12
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 09000000060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 12
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0b0000000a00000009000000060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 11
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0a00000009000000060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 11
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 09000000060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 11
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 060000000700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 11
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 0700000008000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 11
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  - target: {fileID: 8712360513235835851, guid: cf97192e81a076144b4ab53be9c77985, type: 3}
+    locations: 08000000050000000400000003000000000000000100000002000000
+    loopCount: 0
+    speed: 11
+    lifeTime: 1.5
+    nextPosition: 0
+    currentLoop: 0
+    timing: 0
+    startTime: 7.093959
+    active: 0
+  numberToSpawn: 010000000300000003000000040000000100000008000000090000000900000001000000010000000100000003000000030000000300000003000000010000000300000006000000
   gameObjects: []
   moveToLocation:
   - {fileID: 139707494}
