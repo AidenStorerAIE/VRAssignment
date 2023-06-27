@@ -287,6 +287,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FireL",
+                    "type": "Button",
+                    "id": "136b2927-5333-47aa-86e0-fafa75394a36",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -474,6 +483,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwapL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c354bd17-9437-4df5-8547-7af89d666bab",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireL",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -818,7 +838,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "FireR",
                     "type": "Button",
                     "id": "b56fbfd1-0820-4b10-9ade-b33eb60c12f8",
                     "expectedControlType": "Button",
@@ -1029,7 +1049,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Fire",
+                    "action": "FireR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
