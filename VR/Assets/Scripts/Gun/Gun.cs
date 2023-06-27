@@ -22,6 +22,9 @@ public class Gun : MonoBehaviour
     public GameObject magPrefab;
     public Transform dropPoint;
     public Collider reloadSpace;
+    public HapticInteractable gunHaptic;
+    public XRBaseController controllerL;
+    public XRBaseController controllerR;
 
     [Header("Stats")]
     bool equipped;
@@ -43,6 +46,7 @@ public class Gun : MonoBehaviour
     public bool unlimitedAmmo;
 
     public List<AudioClip> gunsShotSounds;
+    public AudioClip emptySound;
     private AudioSource audioSource;
 
 
@@ -96,17 +100,19 @@ public class Gun : MonoBehaviour
 
     public void Swap()
     {
-        if (curParent = attachPointR)
+        if (curParent == attachPointR)
         {
             curParent = attachPointL;
             interactorL.enabled = false;
             interactorR.enabled = true;
+            transform.rotation = curParent.rotation;
         }
         else
         {
             curParent = attachPointR;
             interactorR.enabled = false;
             interactorL.enabled = true;
+            transform.rotation = curParent.rotation;
         }
         transform.parent = curParent;
         //transform.localPosition = Vector3.zero;
@@ -122,11 +128,17 @@ public class Gun : MonoBehaviour
 
         if (curAmmo == 0)
         {
+            PlayEmptySound();
             return;
         }
 
         if (!unlimitedAmmo)
             curAmmo--;
+
+        if (curParent == attachPointR)
+            gunHaptic.TriggerHaptic(controllerR);
+        else
+            gunHaptic.TriggerHaptic(controllerL);
 
         UpdateUI();
         //anim.SetTrigger("Fire");
@@ -147,6 +159,11 @@ public class Gun : MonoBehaviour
     {
         int rando = Random.Range(0, gunsShotSounds.Count);
         audioSource.clip = gunsShotSounds[rando];
+        audioSource.Play();
+    }
+    public void PlayEmptySound()
+    {
+        audioSource.clip = emptySound;
         audioSource.Play();
     }
 

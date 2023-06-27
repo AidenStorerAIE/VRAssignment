@@ -11,9 +11,7 @@ public class MouseRayForTesting : MonoBehaviour
     public InputActionManager playerInput;
     public Gun Gun;
 
-    //test haptic
-    public HapticInteractable haphap;
-    public XRBaseController controller;
+
 
     void Start()
     {
@@ -28,23 +26,15 @@ public class MouseRayForTesting : MonoBehaviour
     }
     void FireL(InputAction.CallbackContext context)
     {
-        //haphap.TriggerHaptic(controller);
-
-
         if (Gun.curParent == Gun.attachPointL)
         {
             Gun.Fire();
-
         }
 
     }
 
     void FireR(InputAction.CallbackContext context)
     {
-        haphap.TriggerHaptic(controller);
-
-
-
         if (Gun.curParent == Gun.attachPointR)
             Gun.Fire();
     }
