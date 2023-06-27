@@ -14,6 +14,8 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
+        minutes = startMinutes;
+        seconds = startSeconds;
         UpdateUI();
     }
 
