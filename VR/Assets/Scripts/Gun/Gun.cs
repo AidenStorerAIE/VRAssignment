@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     Rigidbody rb;
     Animator anim;
     public TextMeshPro ammoText;
-    Transform curParent;
+    [HideInInspector] public Transform curParent;
     public Transform attachPointL;
     public Transform attachPointR;
     public GameObject magPrefab;
@@ -38,15 +38,20 @@ public class Gun : MonoBehaviour
     [Header("Debugging")]
     public GameObject lHand;
     public GameObject rHand;
-    public XRRayInteractor interactor;
+    public XRRayInteractor interactorR;
+    public XRRayInteractor interactorL;
     public bool unlimitedAmmo;
+
+    public List<AudioClip> gunsShotSounds;
+    private AudioSource audioSource;
 
 
     void Start()
     {
-        //gets
+        //references
         playerInput = GetComponent<InputActionManager>();
         targetManager = FindObjectOfType<TargetManager>();
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
@@ -59,7 +64,7 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         if(Vector3.Distance(transform.position, rHand.transform.position) < 1f 
-            //|| Vector3.Distance(transform.position, lHand.transform.position) < 0.5f
+            || Vector3.Distance(transform.position, lHand.transform.position) < 1f
             )
         {
             transform.parent = curParent;
@@ -71,14 +76,14 @@ public class Gun : MonoBehaviour
                 return;
 
             //inital equip
-            curParent = attachPointR;    //change later
+            curParent = attachPointR;
             ammoText.gameObject.SetActive(true);
 
             rb.useGravity = false;
             equipped = true;
 
             GetComponent<XRGrabInteractable>().enabled = false;
-            //interactor.enabled = false;
+            interactorR.enabled = false;
             //transform.localRotation = transform.parent.rotation;
         }
         else
@@ -94,15 +99,17 @@ public class Gun : MonoBehaviour
         if (curParent = attachPointR)
         {
             curParent = attachPointL;
+            interactorL.enabled = false;
+            interactorR.enabled = true;
         }
         else
         {
             curParent = attachPointR;
+            interactorR.enabled = false;
+            interactorL.enabled = true;
         }
         transform.parent = curParent;
-        transform.localPosition = Vector3.zero;
-
-        //interactor.enabled = false;
+        //transform.localPosition = Vector3.zero;
     }
 
     public void Fire()
@@ -122,7 +129,8 @@ public class Gun : MonoBehaviour
             curAmmo--;
 
         UpdateUI();
-        anim.SetTrigger("Fire");
+        //anim.SetTrigger("Fire");
+        PlaySound();
         fireTimer = Time.time;
 
         RaycastHit hit;
@@ -134,6 +142,12 @@ public class Gun : MonoBehaviour
                 targetManager.DropTarget(hit.collider.transform.parent.gameObject, true);
             }
         }
+    }
+    public void PlaySound()
+    {
+        int rando = Random.Range(0, gunsShotSounds.Count);
+        audioSource.clip = gunsShotSounds[rando];
+        audioSource.Play();
     }
 
     public void DropMagazine()
