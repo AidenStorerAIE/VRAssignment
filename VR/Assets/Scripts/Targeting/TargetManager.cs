@@ -139,6 +139,7 @@ public class TargetManager : MonoBehaviour
         target.GetComponent<TargetObj>().audioSourceTwo.Play();
         targets[gameObjects.IndexOf(target)].active = false;
 
+        //spawn target if no more targets
         if (countToNextSpawn <= 0)
         {
             if (groupCount < numberToSpawn.Count && running)
@@ -167,10 +168,11 @@ public class TargetManager : MonoBehaviour
                 ClearTargets();
                 running = false;
                 CheckIfMoving();
+                scoreManager.Done();
                 return;
             }
         }
-
+        //add score
         int score = target.GetComponent<TargetObj>().score;
         if (addScore) scoreManager.AddScore(score);
     }
@@ -209,6 +211,8 @@ public class TargetManager : MonoBehaviour
                 }
             }
             CheckIfMoving();
+
+            scoreManager.StartTimer();
         }
     }
 
@@ -216,6 +220,7 @@ public class TargetManager : MonoBehaviour
     {
         Stop();
         active = true;
+
         //countToNextSpawn = startCountToNextSpawn;
     }
 
@@ -224,7 +229,11 @@ public class TargetManager : MonoBehaviour
         foreach (GameObject target in gameObjects)
         {
             running = false;
-            DropTarget(target, false);
+            target.GetComponent<Animator>().SetTrigger("TargetDrop");
+            target.GetComponent<TargetObj>().audioSourceOne.Play();
+            target.GetComponent<TargetObj>().audioSourceTwo.Play();
+            targets[gameObjects.IndexOf(target)].active = false;
+            //DropTarget(target, false);
         }
     }
     public void ClearTargets()

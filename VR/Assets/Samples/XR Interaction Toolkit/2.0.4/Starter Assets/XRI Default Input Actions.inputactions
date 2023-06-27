@@ -296,6 +296,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DropL",
+                    "type": "Button",
+                    "id": "ea02ebe5-97ff-4b2f-978f-ac00824307cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -494,6 +503,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "FireL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf02a115-86da-44ee-8e11-d4cd374aa2f5",
+                    "path": "<XRController>{LeftHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropL",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -847,7 +867,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drop",
+                    "name": "DropR",
                     "type": "Button",
                     "id": "b5f3451d-3d91-4210-b3ca-3aa854c116f0",
                     "expectedControlType": "Button",
@@ -1060,7 +1080,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "DropR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

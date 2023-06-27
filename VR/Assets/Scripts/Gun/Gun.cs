@@ -88,7 +88,7 @@ public class Gun : MonoBehaviour
 
             GetComponent<XRGrabInteractable>().enabled = false;
             interactorR.enabled = false;
-            //transform.localRotation = transform.parent.rotation;
+            transform.rotation = curParent.rotation;
         }
         else
         {
@@ -100,6 +100,8 @@ public class Gun : MonoBehaviour
 
     public void Swap()
     {
+        if (!equipped)
+            return;
         if (curParent == attachPointR)
         {
             curParent = attachPointL;
@@ -117,7 +119,6 @@ public class Gun : MonoBehaviour
         transform.parent = curParent;
         //transform.localPosition = Vector3.zero;
     }
-
     public void Fire()
     {
         if (!equipped)
