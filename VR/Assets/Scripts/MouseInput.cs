@@ -13,6 +13,11 @@ public class MouseInput : MonoBehaviour
     private TargetManagerVarient targetManagerVarient;
     public List<AudioClip> gunshots;
     private AudioSource audioSource;
+    public Transform gun;
+    public Transform shellPos;
+    public GameObject shell;
+    private float lastFire;
+    public float delay;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +36,7 @@ public class MouseInput : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000))
         {
+            gun.LookAt(hit.point);
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
                 setTarget = hit.collider.transform.parent.gameObject;
@@ -47,17 +53,30 @@ public class MouseInput : MonoBehaviour
     }
     private void TestFire(InputAction.CallbackContext context)
     {
-        int rando = Random.Range(0, gunshots.Count);
-        audioSource.clip = gunshots[rando];
-        audioSource.Play();
-        if (setTarget != null)
+        if (Time.time > lastFire + delay)
         {
-            targetManagerVarient.DropTarget(setTarget, setTarget.GetComponent<TargetObj>().score);
+            lastFire = Time.time;
+            gun.GetComponentInChildren<Animator>().SetTrigger("Shoot");
+            var newShell = Instantiate(shell, shellPos.position, Quaternion.Euler(new Vector3(shellPos.rotation.x + 180, shellPos.rotation.y + Random.Range(-15, 15), shellPos.rotation.z + Random.Range(-15, 15))));
+            newShell.GetComponent<Rigidbody>().AddForce(shellPos.transform.up * 100);
+            StartCoroutine(DestroyShell(newShell));
+            int rando = Random.Range(0, gunshots.Count);
+            audioSource.clip = gunshots[rando];
+            audioSource.Play();
+            if (setTarget != null)
+            {
+                targetManagerVarient.DropTarget(setTarget, setTarget.GetComponent<TargetObj>().score);
+            }
         }
     }
     private void Reset(InputAction.CallbackContext context)
     {
         //targetManagerVarient.Stop();
         targetManagerVarient.InitialTarget();
+    }
+    IEnumerator DestroyShell(GameObject shell)
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(shell);
     }
 }
