@@ -3,7 +3,12 @@ guid: cbe200f51d251bd43bb52c081f12feb2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rafters
+    second: {fileID: 2100000, guid: c8e52d448e1c10f439b7f2c8c398cb57, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

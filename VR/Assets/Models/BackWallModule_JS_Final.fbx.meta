@@ -3,7 +3,12 @@ guid: 694cb8382d0648d4882221e5eb5ed903
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Staircase_BackWall
+    second: {fileID: 2100000, guid: 69749c2f790b3b04db9b492b2228f1c8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

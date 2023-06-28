@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b27536c9eaf47be4e94ea21826f9af86
+guid: ac9ba38c4a71f2741a425d80ef4a288c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Roof_Modules
-    second: {fileID: 2100000, guid: 9e11074e2e0511a479153b1b35d98549, type: 2}
+      name: Clown3
+    second: {fileID: 2100000, guid: 94752194bab913b4ea3dc03dacfb51e5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
