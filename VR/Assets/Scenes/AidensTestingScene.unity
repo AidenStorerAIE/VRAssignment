@@ -656,7 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c977887f959225b479af549fd5e0b28e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.10927868
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c977887f959225b479af549fd5e0b28e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -688,7 +688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c977887f959225b479af549fd5e0b28e, type: 3}
       propertyPath: m_Name
-      value: Blockout_1
+      value: Size_Ref
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c977887f959225b479af549fd5e0b28e, type: 3}
