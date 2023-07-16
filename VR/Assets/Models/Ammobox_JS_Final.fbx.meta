@@ -3,7 +3,17 @@ guid: 83aee58d1ea94cc4c9eafb3ac784128d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ammo_Clips
+    second: {fileID: 2100000, guid: 56adcb7215d7e7c42bca0b2eb995e7c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guard_and_Props
+    second: {fileID: 2100000, guid: 442176b6cb5bd6840b3501c180245119, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
