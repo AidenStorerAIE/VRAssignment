@@ -20,8 +20,6 @@ public class PlayerInputController : MonoBehaviour
         playerInput.actionAssets[0].FindAction("DropR").performed += DropMagazineR;
         playerInput.actionAssets[0].FindAction("SwapL").performed += Swap;
         playerInput.actionAssets[0].FindAction("SwapR").performed += Swap;
-
-        //haphap = FindObjectOfType<HapticInteractable>();
     }
     void FireL(InputAction.CallbackContext context)
     {

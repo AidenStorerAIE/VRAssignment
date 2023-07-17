@@ -17,14 +17,15 @@ public class Gun : MonoBehaviour
     Animator anim;
     public TextMeshPro ammoText;
     [HideInInspector] public Transform curParent;
-    public Transform attachPointL;
-    public Transform attachPointR;
+    public Transform attachPointL; public Transform attachPointR;
     public GameObject magPrefab;
     public Transform dropPoint;
     public Collider reloadSpace;
     public HapticInteractable gunHaptic;
-    public XRBaseController controllerL;
-    public XRBaseController controllerR;
+    public XRBaseController controllerL; public XRBaseController controllerR;
+    public ParticleSystem hitParticle;
+    public ParticleSystem muzzleFlashParticle;
+    public Light muzzleFlashLight;
 
     [Header("Stats")]
     bool equipped;
@@ -38,17 +39,15 @@ public class Gun : MonoBehaviour
     public float reloadCooldown;
     float reloadTimer;
 
-    [Header("Debugging")]
-    public GameObject lHand;
-    public GameObject rHand;
-    public XRRayInteractor interactorR;
-    public XRRayInteractor interactorL;
+    [Header("Hands")]
+    public GameObject lHand; public GameObject rHand;
+    public XRRayInteractor interactorL; public XRRayInteractor interactorR;
     public bool unlimitedAmmo;
 
+    [Header("Sounds")]
     public List<AudioClip> gunsShotSounds;
     public AudioClip emptySound;
     private AudioSource audioSource;
-
 
     void Start()
     {
@@ -68,8 +67,7 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         if(Vector3.Distance(transform.position, rHand.transform.position) < 1f 
-            || Vector3.Distance(transform.position, lHand.transform.position) < 1f
-            )
+            || Vector3.Distance(transform.position, lHand.transform.position) < 1f)
         {
             transform.parent = curParent;
 
@@ -96,6 +94,8 @@ public class Gun : MonoBehaviour
             //anim.enabled = false;
             transform.parent = null;
         }
+        if (Time.time - fireTimer < fireCooldown)
+            muzzleFlashLight.enabled = false;
     }
 
     public void Swap()
@@ -121,34 +121,42 @@ public class Gun : MonoBehaviour
     }
     public void Fire()
     {
+        //unable to fire checks
         if (!equipped)
         return;
-
         if (Time.time - fireTimer < fireCooldown)
             return;
-
         if (curAmmo == 0)
         {
             PlayEmptySound();
             return;
         }
 
+        //used for testing
         if (!unlimitedAmmo)
             curAmmo--;
 
+        //controller feedback, vibration
         if (curParent == attachPointR)
             gunHaptic.TriggerHaptic(controllerR);
         else
             gunHaptic.TriggerHaptic(controllerL);
 
         UpdateUI();
-        //anim.SetTrigger("Fire");
         PlaySound();
         fireTimer = Time.time;
+
+        //muzzleFlashParticle.gameObject.SetActive(true);
+        muzzleFlashLight.enabled = true;
+        muzzleFlashParticle.Play();
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
         {
+            Vector3 point = hit.point;
+            //testing, change later for optimisation
+            hitParticle = Instantiate(hitParticle, point, transform.rotation);
+            hitParticle.Play();
 
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
