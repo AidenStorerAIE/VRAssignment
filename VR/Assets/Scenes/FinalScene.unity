@@ -377,7 +377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152679061}
   m_LocalRotation: {x: 0.000110705296, y: 0.99974084, z: -0.0009462697, w: 0.022749064}
-  m_LocalPosition: {x: 1.6671146, y: 0.74857736, z: 7.6647773}
+  m_LocalPosition: {x: 1.6784861, y: 0.74810314, z: 7.4150367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -466,6 +466,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 0.5
   duration: 0.1
+--- !u!1 &155428891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309328378366352887, guid: 14cb863b172636c499aca1e121ed2d96, type: 3}
+  m_PrefabInstance: {fileID: 1429563518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &326432071 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7652437685909397778, guid: 58cb0c0e1448b034fa61bbded6870b5e, type: 3}
@@ -4067,6 +4072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58cb0c0e1448b034fa61bbded6870b5e, type: 3}
+--- !u!1 &2052369577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2806861823611270927, guid: 8565c76e56dc0e04e9857fe5d1a1c013, type: 3}
+  m_PrefabInstance: {fileID: 1114587587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2066189463 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7652437685909397778, guid: 58cb0c0e1448b034fa61bbded6870b5e, type: 3}
@@ -4354,7 +4364,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.44345617
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -4444,28 +4454,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 152679062}
   targetManager: {fileID: 1008198796}
-  gunAnim: {fileID: 8946537973576174296}
-  ammoText: {fileID: 4151200095575739037}
-  curParent: {fileID: 0}
-  attachPointL: {fileID: 1766750151}
-  attachPointR: {fileID: 1301242701}
-  magPrefab: {fileID: 6610562353895212175, guid: 5bca8e55dd894bb4c8e4e6a8e8140f2e, type: 3}
-  dropPoint: {fileID: 5630950691110216090}
-  reloadSpace: {fileID: 3912245355158619910}
-  gunHaptic: {fileID: 152679070}
-  controllerL: {fileID: 651289762}
-  controllerR: {fileID: 958816496}
-  hitParticle: {fileID: 5410492588073875626, guid: 1270524b005484e44b24d3d86b517db6, type: 3}
-  muzzleFlashParticle: {fileID: 4492119890263272910}
-  muzzleFlashLight: {fileID: 5753801587877395186}
-  maxAmmo: 10
-  fireCooldown: 0.2
-  reloadCooldown: 0.1
   lHand: {fileID: 651289758}
   rHand: {fileID: 958816493}
   interactorL: {fileID: 651289761}
   interactorR: {fileID: 958816495}
+  handModelL: {fileID: 155428891}
+  handModelR: {fileID: 2052369577}
+  curParent: {fileID: 0}
+  controllerL: {fileID: 651289762}
+  controllerR: {fileID: 958816496}
+  attachPointL: {fileID: 1766750151}
+  attachPointR: {fileID: 1301242701}
+  gunHaptic: {fileID: 152679070}
+  magPrefab: {fileID: 6610562353895212175, guid: df39b7c8cb3de5644affd84052172cd9, type: 3}
+  dropPoint: {fileID: 5630950691110216090}
+  hitParticle: {fileID: 5410492588073875626, guid: 1270524b005484e44b24d3d86b517db6, type: 3}
+  muzzleFlashParticle: {fileID: 4492119890263272910}
+  muzzleFlashLight: {fileID: 5753801587877395186}
+  ammoText: {fileID: 4151200095575739037}
+  gunAnimator: {fileID: 8946537973576174296}
   unlimitedAmmo: 0
+  maxAmmo: 10
+  fireCooldown: 0.2
+  reloadCooldown: 0.1
+  lightCooldown: 0.1
   gunsShotSounds:
   - {fileID: 8300000, guid: dd9191737b5fe7e4b8670e694a43e565, type: 3}
   - {fileID: 8300000, guid: ef028c8dba79b9c419cdf5a6f881130f, type: 3}
@@ -5240,28 +5252,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
   targetManager: {fileID: 0}
-  gunAnim: {fileID: 0}
-  ammoText: {fileID: 3699431293528604269}
-  curParent: {fileID: 0}
-  attachPointL: {fileID: 0}
-  attachPointR: {fileID: 0}
-  magPrefab: {fileID: 6610562353895212175, guid: 5bca8e55dd894bb4c8e4e6a8e8140f2e, type: 3}
-  dropPoint: {fileID: 4966947600247625066}
-  reloadSpace: {fileID: 4359507783071478774}
-  gunHaptic: {fileID: 0}
-  controllerL: {fileID: 0}
-  controllerR: {fileID: 0}
-  hitParticle: {fileID: 5410492588073875626, guid: 1270524b005484e44b24d3d86b517db6, type: 3}
-  muzzleFlashParticle: {fileID: 4492119890263272910}
-  muzzleFlashLight: {fileID: 5753801587877395186}
-  maxAmmo: 10
-  fireCooldown: 0.2
-  reloadCooldown: 0.1
   lHand: {fileID: 0}
   rHand: {fileID: 0}
   interactorL: {fileID: 0}
   interactorR: {fileID: 0}
+  handModelL: {fileID: 0}
+  handModelR: {fileID: 0}
+  curParent: {fileID: 0}
+  controllerL: {fileID: 0}
+  controllerR: {fileID: 0}
+  attachPointL: {fileID: 0}
+  attachPointR: {fileID: 0}
+  gunHaptic: {fileID: 0}
+  magPrefab: {fileID: 6610562353895212175, guid: 5bca8e55dd894bb4c8e4e6a8e8140f2e, type: 3}
+  dropPoint: {fileID: 4966947600247625066}
+  hitParticle: {fileID: 5410492588073875626, guid: 1270524b005484e44b24d3d86b517db6, type: 3}
+  muzzleFlashParticle: {fileID: 4492119890263272910}
+  muzzleFlashLight: {fileID: 5753801587877395186}
+  ammoText: {fileID: 3699431293528604269}
+  gunAnimator: {fileID: 0}
   unlimitedAmmo: 0
+  maxAmmo: 10
+  fireCooldown: 0.2
+  reloadCooldown: 0.1
+  lightCooldown: 0
   gunsShotSounds:
   - {fileID: 8300000, guid: dd9191737b5fe7e4b8670e694a43e565, type: 3}
   - {fileID: 8300000, guid: ef028c8dba79b9c419cdf5a6f881130f, type: 3}
@@ -6011,7 +6025,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2379999336425479185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.022, y: -0.185, z: 0.081}
+  m_LocalPosition: {x: -0.022, y: -0.0921, z: 0.081}
   m_LocalScale: {x: 0.19567, y: 0.19567, z: 0.19567}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6118,7 +6132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7492591799185084097}
   m_LocalRotation: {x: -0, y: -0, z: -0.6678303, w: 0.7443136}
-  m_LocalPosition: {x: 1.65, y: 1.57, z: 6.973}
+  m_LocalPosition: {x: 1.659, y: 1.488, z: 6.973}
   m_LocalScale: {x: 0.57574, y: 0.57574, z: 0.57574}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11427,7 +11441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7093365892832027876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.233, z: 0.067}
+  m_LocalPosition: {x: -0, y: -0.179, z: 0.0201}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11519,7 +11533,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.15
   m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -12162,7 +12176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5195195958293027407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.273, z: 0}
+  m_LocalPosition: {x: 0, y: 0.163, z: -0.145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
