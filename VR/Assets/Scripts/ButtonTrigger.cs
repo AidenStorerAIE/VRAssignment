@@ -7,17 +7,18 @@ public class ButtonTrigger : MonoBehaviour
     public Timer timer;
     public TargetManager targetManager;
     Vector3 startPos;
+    public GameObject buttonOBJ;
 
     private void Start()
     {
-        startPos = transform.position;
+        startPos = buttonOBJ.transform.position;
     }
 
     private void FixedUpdate()
     {
-        if(transform.position.y > startPos.y)
+        if(buttonOBJ.transform.position.y > startPos.y)
         {
-            transform.position = startPos;
+            buttonOBJ.transform.position = startPos;
         }
     }
 

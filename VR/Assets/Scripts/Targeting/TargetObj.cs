@@ -8,10 +8,13 @@ public class TargetObj : MonoBehaviour
     public List<AudioClip> sounds;
     public AudioSource audioSourceOne;
     public AudioSource audioSourceTwo;
+    public List<GameObject> targets;
 
     // Start is called before the first frame update
     void Start()
     {
+        int rando1 = Random.Range(0, targets.Count);
+        targets[rando1].SetActive(true);
         audioSourceOne = GetComponent<AudioSource>();
         if (sounds.Count > 0)
         {
