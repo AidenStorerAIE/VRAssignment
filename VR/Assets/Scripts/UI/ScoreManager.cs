@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
     float startTime;
     public Timer timer;
     public HighScoreManager highscoreManager;
+    public TextMeshPro highScoreText;
 
     public void AddScore(int points)
     {
@@ -22,14 +23,17 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = (score.ToString());
     }
 
+    void UpdateHighScoreUI()
+    {
+        highScoreText.text = (highscoreManager.scores[0].ToString());
+    }
+
     public void StartTimer()
     {
         if(score != 0)
         {
-
             score = 0;
         }
-
         startTime = Time.time;
     }
 
@@ -37,8 +41,9 @@ public class ScoreManager : MonoBehaviour
     {
         if((int)(startTime - Time.time) < Time.time)
         score += (int)(startTime - Time.time);//+ plus amount 
-        UpdateUI();
         highscoreManager.AddScore(score);
+        UpdateUI();
+        UpdateHighScoreUI();
         timer.Stop();
     }
 }
