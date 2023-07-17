@@ -33,6 +33,7 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlashParticle;
     public Light muzzleFlashLight;
     public TextMeshPro ammoText;
+    public Animator gunAnimator;
 
     [Header("Stats")]
     public bool unlimitedAmmo; //used for testing
@@ -47,6 +48,8 @@ public class Gun : MonoBehaviour
     float fireTimer;
     public float reloadCooldown;
     float reloadTimer;
+    public float lightCooldown;
+    float lightTimer;
 
     [Header("Sounds")]
     public List<AudioClip> gunsShotSounds;
@@ -69,8 +72,15 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        if (Time.time - lightTimer > lightCooldown)
+        {
+            //print("Light off");
+            muzzleFlashLight.gameObject.SetActive(false);
+        }
+
+
         //close to either hand. defaults to right
-        if(Vector3.Distance(transform.position, rHand.transform.position) < 1f 
+        if (Vector3.Distance(transform.position, rHand.transform.position) < 1f 
             || Vector3.Distance(transform.position, lHand.transform.position) < 1f)
         {
             //set parent then keep updating localPos
@@ -92,6 +102,8 @@ public class Gun : MonoBehaviour
 
             //inital equip
             curParent = attachPointR;
+            //handModelR.SetActive(false);
+            rHand.transform.GetChild(rHand.transform.childCount - 1).gameObject.SetActive(false);
             handModelR.SetActive(false);
             ammoText.gameObject.SetActive(true);
             //sets
@@ -108,8 +120,6 @@ public class Gun : MonoBehaviour
             transform.parent = null;
         }
         //disabling muzzleflash light
-        if (Time.time - fireTimer < fireCooldown)
-            muzzleFlashLight.gameObject.SetActive(false);
     }
 
 
@@ -138,12 +148,16 @@ public class Gun : MonoBehaviour
 
         UpdateUI();
         PlaySound();
+        gunAnimator.SetTrigger("Fire");
         fireTimer = Time.time;
 
         //particle system
         //muzzleFlashParticle.gameObject.SetActive(true);
         muzzleFlashLight.gameObject.SetActive(true);
         muzzleFlashParticle.Play();
+
+        //print("Light on");
+        lightTimer = Time.time; 
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
@@ -214,7 +228,11 @@ public class Gun : MonoBehaviour
             transform.rotation = curParent.rotation;
             handModelR.SetActive(true);
             handModelL.SetActive(false);
+<<<<<<< HEAD
             equippedL = true; equippedR = false;
+=======
+            lHand.transform.GetChild(lHand.transform.childCount - 1).gameObject.SetActive(false);
+>>>>>>> AidensBranch
         }
         else
         {
@@ -230,7 +248,11 @@ public class Gun : MonoBehaviour
             transform.rotation = curParent.rotation;
             handModelL.SetActive(true);
             handModelR.SetActive(false);
+<<<<<<< HEAD
             equippedL = false; equippedR = true;
+=======
+            rHand.transform.GetChild(rHand.transform.childCount - 1).gameObject.SetActive(false);
+>>>>>>> AidensBranch
         }
         //set parenting
         transform.parent = curParent;
