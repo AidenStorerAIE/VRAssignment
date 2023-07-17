@@ -101,7 +101,7 @@ public class Gun : MonoBehaviour
         }
         //disabling muzzleflash light
         if (Time.time - fireTimer < fireCooldown)
-            muzzleFlashLight.enabled = false;
+            muzzleFlashLight.gameObject.SetActive(false);
     }
 
 
@@ -134,7 +134,7 @@ public class Gun : MonoBehaviour
 
         //particle system
         //muzzleFlashParticle.gameObject.SetActive(true);
-        muzzleFlashLight.enabled = true;
+        muzzleFlashLight.gameObject.SetActive(true);
         muzzleFlashParticle.Play();
 
         RaycastHit hit;
@@ -226,8 +226,6 @@ public class Gun : MonoBehaviour
         audioSource.clip = emptySound;
         audioSource.Play();
     }
-
-
 
     //set UI
     void UpdateUI()
