@@ -37,6 +37,7 @@ public class Gun : MonoBehaviour
     [Header("Stats")]
     public bool unlimitedAmmo; //used for testing
     public int maxAmmo;
+    bool equippedL; bool equippedR;
     bool equipped;
     int curAmmo;
     bool loaded = true;
@@ -82,6 +83,13 @@ public class Gun : MonoBehaviour
             if (equipped)
                 return;
 
+            if (equippedR)
+            {
+                Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
+                magazine.Drop();
+                equippedR = false;
+            }
+
             //inital equip
             curParent = attachPointR;
             handModelR.SetActive(false);
@@ -96,7 +104,7 @@ public class Gun : MonoBehaviour
         else
         {
             //unequip and unparent
-            equipped = false;
+            equippedL = false; equippedR = false; equipped = false;
             transform.parent = null;
         }
         //disabling muzzleflash light
@@ -154,7 +162,7 @@ public class Gun : MonoBehaviour
     //magazine functions
     public void DropMagazine()
     {
-        if (!loaded || !equipped)
+        if (!loaded || (!equipped))
             return;
 
         loaded = false;
@@ -194,25 +202,40 @@ public class Gun : MonoBehaviour
         //if equipped in right hand, change to left hand
         if (curParent == attachPointR)
         {
+            if (equippedL)
+            {
+                Magazine magazine = attachPointL.GetChild(0).GetComponent<Magazine>();
+                magazine.Drop();
+            }
+
             curParent = attachPointL;
             interactorL.enabled = false;
             interactorR.enabled = true;
             transform.rotation = curParent.rotation;
             handModelR.SetActive(true);
             handModelL.SetActive(false);
+            equippedL = true; equippedR = false;
         }
         else
         {
+            if (equippedR)
+            {
+                Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
+                magazine.Drop();
+            }
+
             curParent = attachPointR;
             interactorR.enabled = false;
             interactorL.enabled = true;
             transform.rotation = curParent.rotation;
             handModelL.SetActive(true);
             handModelR.SetActive(false);
+            equippedL = false; equippedR = true;
         }
         //set parenting
         transform.parent = curParent;
     }
+
 
     //sound functions
     public void PlaySound()

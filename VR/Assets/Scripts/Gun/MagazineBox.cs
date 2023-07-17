@@ -12,22 +12,35 @@ public class MagazineBox : MonoBehaviour
     public GameObject magazinePrefab;
     public Transform spawnPos;
     public InputActionManager playerInput;
-    public float spawnTime;
-    float spawnTimer;
-
+    public Gun gun;
 
     private void Start()
     {
-        playerInput.actionAssets[0].FindAction("FireL").performed += Spawn;
-        playerInput.actionAssets[0].FindAction("FireR").performed += Spawn;
+        playerInput.actionAssets[0].FindAction("FireL").performed += SpawnL;
+        playerInput.actionAssets[0].FindAction("FireR").performed += SpawnR;
     }
 
-    void Spawn(InputAction.CallbackContext context)
+    void SpawnL(InputAction.CallbackContext context)
     {
         if (!active)
             return;
 
-        Instantiate(magazinePrefab, spawnPos);
+        //replace player hand instead
+        Magazine magazine = Instantiate(magazinePrefab, spawnPos).GetComponent<Magazine>();
+        magazine.gun = gun;
+        magazine.SelectL();
+        //set hand
+    }
+    void SpawnR(InputAction.CallbackContext context)
+    {
+        if (!active)
+            return;
+
+        //replace player hand instead
+        Magazine magazine = Instantiate(magazinePrefab, spawnPos).GetComponent<Magazine>();
+        magazine.gun = gun;
+        magazine.SelectR();
+        //set hand
     }
 
     public void Select()

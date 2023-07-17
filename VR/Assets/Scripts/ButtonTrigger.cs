@@ -22,13 +22,13 @@ public class ButtonTrigger : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.transform.tag == "Button")
         {
             timer.Activate();
             targetManager.InitialTarget();
+            buttonOBJ.transform.position = startPos;
         }
     }
 }
