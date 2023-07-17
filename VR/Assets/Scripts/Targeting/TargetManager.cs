@@ -236,6 +236,7 @@ public class TargetManager : MonoBehaviour
         {
             if (targets[gameObjects.IndexOf(target)].active == true)
             {
+                target.GetComponent<TargetObj>().score = 0;
                 target.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
             }
             target.GetComponent<Animator>().SetTrigger("TargetDrop");
