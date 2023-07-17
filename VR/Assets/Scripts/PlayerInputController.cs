@@ -14,6 +14,7 @@ public class PlayerInputController : MonoBehaviour
     void Start()
     {
         playerInput = GetComponent<InputActionManager>();
+        //inputs
         playerInput.actionAssets[0].FindAction("FireL").performed += FireL;
         playerInput.actionAssets[0].FindAction("FireR").performed += FireR;
         playerInput.actionAssets[0].FindAction("DropL").performed += DropMagazineL;
@@ -21,6 +22,8 @@ public class PlayerInputController : MonoBehaviour
         playerInput.actionAssets[0].FindAction("SwapL").performed += Swap;
         playerInput.actionAssets[0].FindAction("SwapR").performed += Swap;
     }
+
+    //shooting, checks if gun in correct hand first
     void FireL(InputAction.CallbackContext context)
     {
         if (Gun.curParent == Gun.attachPointL)
@@ -33,6 +36,7 @@ public class PlayerInputController : MonoBehaviour
             Gun.Fire();
     }
 
+    //reloading, checks if gun in correct hand first
     void DropMagazineL(InputAction.CallbackContext context)
     {
         if (Gun.curParent == Gun.attachPointL)
@@ -48,13 +52,4 @@ public class PlayerInputController : MonoBehaviour
     {
         Gun.Swap();
     }
-
-    //public void Active()
-    //{
-    //    castHit = true;
-    //}
-    //public void Inactive()
-    //{
-    //    castHit = false;
-    //}
 }

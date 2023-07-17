@@ -6,36 +6,34 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class TargetManager : MonoBehaviour
 {
+    [Header("Target Management")]
     public Target[] targets;
     public List<int> numberToSpawn;
     public List<GameObject> gameObjects;
     public List<Transform> moveToLocation;
-    [HideInInspector]
-    public int groupCount;
-    [HideInInspector]
-    public int targetCount;
+    private int groupCount;
+    private int targetCount;
+
     public bool running;
-    [HideInInspector]
-    int countToNextSpawn;
+    private int countToNextSpawn;
     public int startCountToNextSpawn;
+
+    //references
     XRInteractionManager interactionManager;
     ScoreManager scoreManager;
     AudioSource audioSource;
-
-    //debug
-    public bool active = true;
 
     void Start()
     {
         interactionManager = FindObjectOfType<XRInteractionManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
         audioSource = GetComponent<AudioSource>();
-        active = true;
         countToNextSpawn = startCountToNextSpawn;
     }
 
     void Update()
     {
+        //don't run if no targets or not active
         if (gameObjects.Count <= 0 || !running)
             return;
 
@@ -47,6 +45,7 @@ public class TargetManager : MonoBehaviour
                 {
                     int locationValue = Convert.ToInt32(targets[gameObjects.IndexOf(gameObject)].locations[targets[gameObjects.IndexOf(gameObject)].nextPosition]);
                     gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, moveToLocation[locationValue].position, targets[gameObjects.IndexOf(gameObject)].speed * Time.deltaTime);
+                    //if at target location begin going to next location
                     if (gameObject.transform.position == moveToLocation[locationValue].position)
                     {
                         if (targets[gameObjects.IndexOf(gameObject)].nextPosition + 1 != targets[gameObjects.IndexOf(gameObject)].locations.Count)
@@ -129,17 +128,19 @@ public class TargetManager : MonoBehaviour
     //if target is shot
     public void DropTarget(GameObject target, bool addScore)
     {
-        
+        //if bad target is hit
         if (target.gameObject.tag != "BadTarget")
         {
             countToNextSpawn--;
         }
+
+        //plays drop animation
         target.GetComponent<Animator>().SetTrigger("TargetDrop");
         target.GetComponent<TargetObj>().audioSourceOne.Play();
         target.GetComponent<TargetObj>().audioSourceTwo.Play();
         targets[gameObjects.IndexOf(target)].active = false;
 
-        //spawn target if no more targets
+        //spawn next wave if no more targets
         if (countToNextSpawn <= 0)
         {
             if (groupCount < numberToSpawn.Count && running)
@@ -163,6 +164,7 @@ public class TargetManager : MonoBehaviour
                 }
                 CheckIfMoving();
             }
+            //if current wave was last wave (Game Over)
             else
             {
                 ClearTargets();
@@ -177,6 +179,7 @@ public class TargetManager : MonoBehaviour
         if (addScore) scoreManager.AddScore(score);
     }
 
+    //Initial spawn
     public void InitialTarget()
     {
         if (!running)
@@ -211,29 +214,20 @@ public class TargetManager : MonoBehaviour
                 }
             }
             CheckIfMoving();
-
             scoreManager.StartTimer();
         }
     }
 
-    public void Reset()
-    {
-        Stop();
-        active = true;
-
-        //countToNextSpawn = startCountToNextSpawn;
-    }
-
     public void Stop()
     {
+        running = false;
+        //drops targets
         foreach (GameObject target in gameObjects)
         {
-            running = false;
             target.GetComponent<Animator>().SetTrigger("TargetDrop");
             target.GetComponent<TargetObj>().audioSourceOne.Play();
             target.GetComponent<TargetObj>().audioSourceTwo.Play();
             targets[gameObjects.IndexOf(target)].active = false;
-            //DropTarget(target, false);
         }
     }
     public void ClearTargets()

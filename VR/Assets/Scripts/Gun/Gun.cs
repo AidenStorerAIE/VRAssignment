@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
     public InputActionManager playerInput;
     public TargetManager targetManager;
     Rigidbody rb;
-    Animator anim;
+    //Animator anim;
     public TextMeshPro ammoText;
     [HideInInspector] public Transform curParent;
     public Transform attachPointL; public Transform attachPointR;
@@ -56,7 +56,7 @@ public class Gun : MonoBehaviour
         targetManager = FindObjectOfType<TargetManager>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
 
         //ammo setting
         curAmmo = maxAmmo;
@@ -66,34 +66,37 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        //close to either hand. defaults to right
         if(Vector3.Distance(transform.position, rHand.transform.position) < 1f 
             || Vector3.Distance(transform.position, lHand.transform.position) < 1f)
         {
+            //set parent then keep updating localPos
             transform.parent = curParent;
 
             if (transform.parent != null)
             transform.localPosition = Vector3.zero;
             
+            //if already equipped, no need to run intial equip
             if (equipped)
                 return;
 
             //inital equip
             curParent = attachPointR;
             ammoText.gameObject.SetActive(true);
-
+            //sets
             rb.useGravity = false;
             equipped = true;
-
             GetComponent<XRGrabInteractable>().enabled = false;
             interactorR.enabled = false;
             transform.rotation = curParent.rotation;
         }
         else
         {
+            //unequip and unparent
             equipped = false;
-            //anim.enabled = false;
             transform.parent = null;
         }
+        //disabling muzzleflash light
         if (Time.time - fireTimer < fireCooldown)
             muzzleFlashLight.enabled = false;
     }
@@ -102,6 +105,8 @@ public class Gun : MonoBehaviour
     {
         if (!equipped)
             return;
+
+        //if equipped in right hand, change to left hand
         if (curParent == attachPointR)
         {
             curParent = attachPointL;
@@ -116,8 +121,8 @@ public class Gun : MonoBehaviour
             interactorL.enabled = true;
             transform.rotation = curParent.rotation;
         }
+        //set parenting
         transform.parent = curParent;
-        //transform.localPosition = Vector3.zero;
     }
     public void Fire()
     {
@@ -146,6 +151,7 @@ public class Gun : MonoBehaviour
         PlaySound();
         fireTimer = Time.time;
 
+        //particle system
         //muzzleFlashParticle.gameObject.SetActive(true);
         muzzleFlashLight.enabled = true;
         muzzleFlashParticle.Play();
@@ -164,6 +170,8 @@ public class Gun : MonoBehaviour
             }
         }
     }
+
+    //sound functions
     public void PlaySound()
     {
         int rando = Random.Range(0, gunsShotSounds.Count);
@@ -176,6 +184,7 @@ public class Gun : MonoBehaviour
         audioSource.Play();
     }
 
+    //magazine functions
     public void DropMagazine()
     {
 
@@ -192,7 +201,6 @@ public class Gun : MonoBehaviour
 
         reloadTimer = Time.time;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         Magazine mag = other.GetComponent<Magazine>();
@@ -213,6 +221,7 @@ public class Gun : MonoBehaviour
         }
     }
 
+    //set UI
     void UpdateUI()
     {
         ammoText.text = (curAmmo + "/" + maxAmmo);

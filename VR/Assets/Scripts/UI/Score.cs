@@ -17,6 +17,4 @@ public class Score : MonoBehaviour
     {
         scoreText.text = ("Score: " + score);
     }
-
-
 }

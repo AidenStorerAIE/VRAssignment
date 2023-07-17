@@ -7,14 +7,11 @@ public class HighScoreManager : MonoBehaviour
 {
     public List<Score> scores;
     public int maxScoreCount;
-    //int scoreCount;
-
 
     private void Start()
     {
         for (int i = 0; i < maxScoreCount; i++)
             scores[i].score = 0;
- 
     }
 
     public void AddScore(int score)
@@ -26,7 +23,6 @@ public class HighScoreManager : MonoBehaviour
             {
                 scores[i].score = score;
                 scores[i].ChangeScore();
-                //scores.Sort();
                 return;
             }
             if (score > scores[i].score)
@@ -61,8 +57,6 @@ public class HighScoreManager : MonoBehaviour
                     scores[j] = scores[j + 1];
                     scores[j + 1 ] = tempScore;
                 }
-
-
             }
         }
     }
