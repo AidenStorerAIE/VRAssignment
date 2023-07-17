@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
     [Header("Magazine References")]
     public GameObject magPrefab;
     public Transform dropPoint;
+    public GameObject magInGun;
 
     [Header("Effects/UI References")]
     public ParticleSystem hitParticle;
@@ -54,6 +55,8 @@ public class Gun : MonoBehaviour
     public List<AudioClip> gunsShotSounds;
     public AudioClip emptySound;
     private AudioSource audioSource;
+    public AudioClip loadSound;
+    public AudioClip unloadSound;
 
     void Start()
     {
@@ -173,6 +176,9 @@ public class Gun : MonoBehaviour
             return;
 
         loaded = false;
+        magInGun.SetActive(false);
+        audioSource.clip = unloadSound;
+        audioSource.Play();
         Magazine mag = Instantiate(magPrefab, dropPoint).GetComponent<Magazine>();
         mag.transform.parent = null;
         mag.ammoCount = curAmmo;
@@ -196,6 +202,9 @@ public class Gun : MonoBehaviour
             {
                 curAmmo = mag.ammoCount;
                 UpdateUI();
+                magInGun.SetActive(true);
+                audioSource.clip = loadSound;
+                audioSource.Play();
                 loaded = true;
                 Destroy(mag.gameObject);
             }
