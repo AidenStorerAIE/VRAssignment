@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     [Header("Controller References")]
     public GameObject lHand; public GameObject rHand;
     public XRRayInteractor interactorL; public XRRayInteractor interactorR;
+    public GameObject handModelL; public GameObject handModelR;
     [HideInInspector] public Transform curParent;
     public XRBaseController controllerL; public XRBaseController controllerR;
     public Transform attachPointL; public Transform attachPointR;
@@ -83,6 +84,7 @@ public class Gun : MonoBehaviour
 
             //inital equip
             curParent = attachPointR;
+            handModelR.SetActive(false);
             ammoText.gameObject.SetActive(true);
             //sets
             rb.useGravity = false;
@@ -196,6 +198,8 @@ public class Gun : MonoBehaviour
             interactorL.enabled = false;
             interactorR.enabled = true;
             transform.rotation = curParent.rotation;
+            handModelR.SetActive(true);
+            handModelL.SetActive(false);
         }
         else
         {
@@ -203,6 +207,8 @@ public class Gun : MonoBehaviour
             interactorR.enabled = false;
             interactorL.enabled = true;
             transform.rotation = curParent.rotation;
+            handModelL.SetActive(true);
+            handModelR.SetActive(false);
         }
         //set parenting
         transform.parent = curParent;
