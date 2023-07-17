@@ -64,6 +64,6 @@ public class Timer : MonoBehaviour
     {
         string secondsString = seconds.ToString().Length > secondsStringLength ? 
             seconds.ToString().Substring(0, secondsStringLength) : seconds.ToString();
-        timerText.text = ("Time: " + minutes.ToString() + ":" + secondsString);
+        timerText.text = (minutes.ToString() + ":" + secondsString);
     }
 }

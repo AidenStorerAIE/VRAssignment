@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateUI()
     {
-        scoreText.text = ("Score: " + score.ToString());
+        scoreText.text = (score.ToString());
     }
 
     public void StartTimer()
