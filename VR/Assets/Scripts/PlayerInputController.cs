@@ -9,7 +9,16 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PlayerInputController : MonoBehaviour
 {
     public InputActionManager playerInput;
-    public Gun Gun;
+    public Gun gun;
+
+    bool ParentedL()
+    {
+        return gun.curParent == gun.attachPointL;
+    }
+    bool ParentedR()
+    {
+        return gun.curParent == gun.attachPointR;
+    }
 
     void Start()
     {
@@ -26,30 +35,42 @@ public class PlayerInputController : MonoBehaviour
     //shooting, checks if gun in correct hand first
     void FireL(InputAction.CallbackContext context)
     {
-        if (Gun.curParent == Gun.attachPointL)
-            Gun.Fire();
+        if (ParentedL())
+            gun.Fire();
     }
 
     void FireR(InputAction.CallbackContext context)
     {
-        if (Gun.curParent == Gun.attachPointR)
-            Gun.Fire();
+        if (ParentedR())
+            gun.Fire();
     }
 
     //reloading, checks if gun in correct hand first
     void DropMagazineL(InputAction.CallbackContext context)
     {
-        if (Gun.curParent == Gun.attachPointL)
-            Gun.DropMagazine();
+        if (ParentedL())
+            gun.DropMagazine();
+        else if (gun.equippedL)
+        {
+            Magazine magazine = gun.attachPointL.GetChild(0).GetComponent<Magazine>();
+            magazine.Drop();
+            gun.equippedL = false;
+        }
     }
     void DropMagazineR(InputAction.CallbackContext context)
     {
-        if (Gun.curParent == Gun.attachPointR)
-            Gun.DropMagazine();
+        if (ParentedR())
+            gun.DropMagazine();
+        else if (gun.equippedR)
+        {
+            Magazine magazine = gun.attachPointR.GetChild(0).GetComponent<Magazine>();
+            magazine.Drop();
+            gun.equippedR = false;
+        }
     }
 
     void Swap(InputAction.CallbackContext context)
     {
-        Gun.Swap();
+        gun.Swap();
     }
 }
