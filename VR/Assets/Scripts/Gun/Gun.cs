@@ -10,26 +10,33 @@ using UnityEngine.XR;
 
 public class Gun : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Player/Manager References")]
     public InputActionManager playerInput;
     public TargetManager targetManager;
     Rigidbody rb;
-    //Animator anim;
-    public TextMeshPro ammoText;
+
+    [Header("Controller References")]
+    public GameObject lHand; public GameObject rHand;
+    public XRRayInteractor interactorL; public XRRayInteractor interactorR;
     [HideInInspector] public Transform curParent;
+    public XRBaseController controllerL; public XRBaseController controllerR;
     public Transform attachPointL; public Transform attachPointR;
+    public HapticInteractable gunHaptic;
+
+    [Header("Magazine References")]
     public GameObject magPrefab;
     public Transform dropPoint;
-    public Collider reloadSpace;
-    public HapticInteractable gunHaptic;
-    public XRBaseController controllerL; public XRBaseController controllerR;
+
+    [Header("Effects/UI References")]
     public ParticleSystem hitParticle;
     public ParticleSystem muzzleFlashParticle;
     public Light muzzleFlashLight;
+    public TextMeshPro ammoText;
 
     [Header("Stats")]
-    bool equipped;
+    public bool unlimitedAmmo; //used for testing
     public int maxAmmo;
+    bool equipped;
     int curAmmo;
     bool loaded = true;
 
@@ -38,11 +45,6 @@ public class Gun : MonoBehaviour
     float fireTimer;
     public float reloadCooldown;
     float reloadTimer;
-
-    [Header("Hands")]
-    public GameObject lHand; public GameObject rHand;
-    public XRRayInteractor interactorL; public XRRayInteractor interactorR;
-    public bool unlimitedAmmo;
 
     [Header("Sounds")]
     public List<AudioClip> gunsShotSounds;
@@ -56,7 +58,6 @@ public class Gun : MonoBehaviour
         targetManager = FindObjectOfType<TargetManager>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        //anim = GetComponent<Animator>();
 
         //ammo setting
         curAmmo = maxAmmo;
@@ -101,29 +102,7 @@ public class Gun : MonoBehaviour
             muzzleFlashLight.enabled = false;
     }
 
-    public void Swap()
-    {
-        if (!equipped)
-            return;
 
-        //if equipped in right hand, change to left hand
-        if (curParent == attachPointR)
-        {
-            curParent = attachPointL;
-            interactorL.enabled = false;
-            interactorR.enabled = true;
-            transform.rotation = curParent.rotation;
-        }
-        else
-        {
-            curParent = attachPointR;
-            interactorR.enabled = false;
-            interactorL.enabled = true;
-            transform.rotation = curParent.rotation;
-        }
-        //set parenting
-        transform.parent = curParent;
-    }
     public void Fire()
     {
         //unable to fire checks
@@ -160,8 +139,7 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
         {
             Vector3 point = hit.point;
-            //testing, change later for optimisation
-            hitParticle = Instantiate(hitParticle, point, transform.rotation);
+            hitParticle.transform.position = point;
             hitParticle.Play();
 
             if (hit.collider.gameObject.tag == "TargetCollider")
@@ -171,23 +149,9 @@ public class Gun : MonoBehaviour
         }
     }
 
-    //sound functions
-    public void PlaySound()
-    {
-        int rando = Random.Range(0, gunsShotSounds.Count);
-        audioSource.clip = gunsShotSounds[rando];
-        audioSource.Play();
-    }
-    public void PlayEmptySound()
-    {
-        audioSource.clip = emptySound;
-        audioSource.Play();
-    }
-
     //magazine functions
     public void DropMagazine()
     {
-
         if (!loaded || !equipped)
             return;
 
@@ -209,7 +173,7 @@ public class Gun : MonoBehaviour
             return;
         }
 
-        if(curAmmo != maxAmmo)
+        if (curAmmo != maxAmmo)
         {
             if (Time.time - reloadTimer > reloadCooldown)
             {
@@ -220,6 +184,44 @@ public class Gun : MonoBehaviour
             }
         }
     }
+    public void Swap()
+    {
+        if (!equipped)
+            return;
+
+        //if equipped in right hand, change to left hand
+        if (curParent == attachPointR)
+        {
+            curParent = attachPointL;
+            interactorL.enabled = false;
+            interactorR.enabled = true;
+            transform.rotation = curParent.rotation;
+        }
+        else
+        {
+            curParent = attachPointR;
+            interactorR.enabled = false;
+            interactorL.enabled = true;
+            transform.rotation = curParent.rotation;
+        }
+        //set parenting
+        transform.parent = curParent;
+    }
+
+    //sound functions
+    public void PlaySound()
+    {
+        int rando = Random.Range(0, gunsShotSounds.Count);
+        audioSource.clip = gunsShotSounds[rando];
+        audioSource.Play();
+    }
+    public void PlayEmptySound()
+    {
+        audioSource.clip = emptySound;
+        audioSource.Play();
+    }
+
+
 
     //set UI
     void UpdateUI()
