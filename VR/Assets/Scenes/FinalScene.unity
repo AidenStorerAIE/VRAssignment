@@ -4468,6 +4468,8 @@ MonoBehaviour:
   gunAnimator: {fileID: 8946537973576174296}
   unlimitedAmmo: 0
   maxAmmo: 10
+  equippedL: 0
+  equippedR: 0
   fireCooldown: 0.2
   reloadCooldown: 0.1
   lightCooldown: 0.1
@@ -10569,7 +10571,7 @@ MonoBehaviour:
   magazinePrefab: {fileID: 6610562353895212175, guid: df39b7c8cb3de5644affd84052172cd9, type: 3}
   spawnPos: {fileID: 7679282407282441414}
   playerInput: {fileID: 152679062}
-  spawnTime: 0
+  gun: {fileID: 368908078921772993}
 --- !u!4 &6514033866599153841
 Transform:
   m_ObjectHideFlags: 0

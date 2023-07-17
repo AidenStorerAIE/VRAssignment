@@ -25,10 +25,15 @@ public class MagazineBox : MonoBehaviour
         if (!active)
             return;
 
+        if (gun.equippedL)
+            return;
+
         //replace player hand instead
         Magazine magazine = Instantiate(magazinePrefab, spawnPos).GetComponent<Magazine>();
         magazine.gun = gun;
         magazine.SelectL();
+
+        gun.equippedL = true;
         //set hand
     }
     void SpawnR(InputAction.CallbackContext context)
@@ -36,10 +41,14 @@ public class MagazineBox : MonoBehaviour
         if (!active)
             return;
 
+        if (gun.equippedR)
+            return;
+
         //replace player hand instead
         Magazine magazine = Instantiate(magazinePrefab, spawnPos).GetComponent<Magazine>();
         magazine.gun = gun;
         magazine.SelectR();
+        gun.equippedR = true;
         //set hand
     }
 

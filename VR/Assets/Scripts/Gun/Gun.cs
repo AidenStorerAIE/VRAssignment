@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
     [Header("Stats")]
     public bool unlimitedAmmo; //used for testing
     public int maxAmmo;
-    bool equippedL; bool equippedR;
+    public bool equippedL; public bool equippedR;
     bool equipped;
     int curAmmo;
     bool loaded = true;
@@ -213,6 +213,22 @@ public class Gun : MonoBehaviour
                 audioSource.clip = loadSound;
                 audioSource.Play();
                 loaded = true;
+                if (equippedL)
+                {
+                    mag.Reenable();
+                    equippedL = false;
+                    //    Magazine magazine = attachPointL.GetChild(0).GetComponent<Magazine>();
+
+                    //    Destroy(magazine.gameObject);
+                }
+                else
+                {
+                    mag.Reenable();
+                    equippedR = false;
+                //    Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
+
+                //    Destroy(magazine.gameObject);
+                }
                 Destroy(mag.gameObject);
             }
         }
@@ -227,8 +243,13 @@ public class Gun : MonoBehaviour
         {
             if (equippedL)
             {
+                if (attachPointL.childCount <= 0)
+                    return;
+
                 Magazine magazine = attachPointL.GetChild(0).GetComponent<Magazine>();
                 magazine.Drop();
+                magazine.transform.position = dropPoint.position;
+                equippedL = false;
             }
 
             curParent = attachPointL;
@@ -238,7 +259,7 @@ public class Gun : MonoBehaviour
             handModelR.SetActive(true);
             handModelL.SetActive(false);
 
-            equippedL = true; equippedR = false;
+            //equippedL = true; equippedR = false;
 
             lHand.transform.GetChild(lHand.transform.childCount - 1).gameObject.SetActive(false);
 
@@ -247,8 +268,13 @@ public class Gun : MonoBehaviour
         {
             if (equippedR)
             {
+                if (attachPointR.childCount <= 0)
+                    return;
+
                 Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
                 magazine.Drop();
+                magazine.transform.position = dropPoint.position;
+                equippedR = false;
             }
 
             curParent = attachPointR;
@@ -258,7 +284,7 @@ public class Gun : MonoBehaviour
             handModelL.SetActive(true);
             handModelR.SetActive(false);
 
-            equippedL = false; equippedR = true;
+            //equippedL = false; equippedR = true;
 
             rHand.transform.GetChild(rHand.transform.childCount - 1).gameObject.SetActive(false);
 
