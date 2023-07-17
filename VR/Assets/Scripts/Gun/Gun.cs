@@ -228,11 +228,11 @@ public class Gun : MonoBehaviour
             transform.rotation = curParent.rotation;
             handModelR.SetActive(true);
             handModelL.SetActive(false);
-<<<<<<< HEAD
+
             equippedL = true; equippedR = false;
-=======
+
             lHand.transform.GetChild(lHand.transform.childCount - 1).gameObject.SetActive(false);
->>>>>>> AidensBranch
+
         }
         else
         {
@@ -248,11 +248,11 @@ public class Gun : MonoBehaviour
             transform.rotation = curParent.rotation;
             handModelL.SetActive(true);
             handModelR.SetActive(false);
-<<<<<<< HEAD
+
             equippedL = false; equippedR = true;
-=======
+
             rHand.transform.GetChild(rHand.transform.childCount - 1).gameObject.SetActive(false);
->>>>>>> AidensBranch
+
         }
         //set parenting
         transform.parent = curParent;
