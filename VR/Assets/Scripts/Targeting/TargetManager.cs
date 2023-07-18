@@ -22,12 +22,14 @@ public class TargetManager : MonoBehaviour
     XRInteractionManager interactionManager;
     ScoreManager scoreManager;
     AudioSource audioSource;
+    MusicManager musicManager;
 
     void Start()
     {
         interactionManager = FindObjectOfType<XRInteractionManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
         audioSource = GetComponent<AudioSource>();
+        musicManager = FindObjectOfType<MusicManager>();
         countToNextSpawn = startCountToNextSpawn;
     }
 
@@ -170,6 +172,7 @@ public class TargetManager : MonoBehaviour
             else
             {
                 ClearTargets();
+                musicManager.Stop();
                 running = false;
                 CheckIfMoving();
                 scoreManager.Done();
@@ -186,6 +189,7 @@ public class TargetManager : MonoBehaviour
     {
         if (!running)
         {
+            musicManager.Play();
             running = true;
             if (gameObjects.Count > 0)
             {
@@ -223,6 +227,8 @@ public class TargetManager : MonoBehaviour
     public void Stop()
     {
         running = false;
+        musicManager.Stop();
+        audioSource.Stop();
         //drops targets
         foreach (GameObject target in gameObjects)
         {
