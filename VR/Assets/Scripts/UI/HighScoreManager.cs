@@ -7,6 +7,7 @@ public class HighScoreManager : MonoBehaviour
 {
     public List<Score> scores;
     public int maxScoreCount;
+    public ScoreManager scoreManager;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class HighScoreManager : MonoBehaviour
             {
                 scores[i].score = score;
                 scores[i].ChangeScore();
+                scoreManager.UpdateHighScoreUI();
                 return;
             }
             if (score > scores[i].score)

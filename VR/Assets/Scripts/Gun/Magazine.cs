@@ -8,7 +8,7 @@ public class Magazine : MonoBehaviour
     public Gun gun;
     Rigidbody rb;
     bool empty;
-    public float despawnTime = 2f;
+    public float despawnTime = 4f;
     float despawnTimer;
 
     private void Start()

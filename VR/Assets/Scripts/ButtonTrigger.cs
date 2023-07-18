@@ -20,6 +20,10 @@ public class ButtonTrigger : MonoBehaviour
         {
             buttonOBJ.transform.position = startPos;
         }
+        if(Vector3.Distance(buttonOBJ.transform.position, startPos) > 1)
+        {
+            buttonOBJ.transform.position = startPos;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +32,7 @@ public class ButtonTrigger : MonoBehaviour
         {
             timer.Activate();
             targetManager.InitialTarget();
-            buttonOBJ.transform.position = startPos;
+            //buttonOBJ.transform.position = startPos;
         }
     }
 }

@@ -23,9 +23,9 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = (score.ToString());
     }
 
-    void UpdateHighScoreUI()
+    public void UpdateHighScoreUI()
     {
-        highScoreText.text = (highscoreManager.scores[0].ToString());
+        highScoreText.text = (highscoreManager.scores[0].score.ToString());
     }
 
     public void StartTimer()
@@ -43,7 +43,7 @@ public class ScoreManager : MonoBehaviour
         score += (int)(startTime - Time.time);//+ plus amount 
         highscoreManager.AddScore(score);
         UpdateUI();
-        UpdateHighScoreUI();
+
         timer.Stop();
     }
 }

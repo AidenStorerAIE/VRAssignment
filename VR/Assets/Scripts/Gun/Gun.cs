@@ -43,6 +43,7 @@ public class Gun : MonoBehaviour
     bool equipped;
     int curAmmo;
     bool loaded = true;
+    public float throwForce;
 
     [Header("Timers")]
     public float fireCooldown;
@@ -172,6 +173,12 @@ public class Gun : MonoBehaviour
             if (hit.collider.gameObject.tag == "TargetCollider")
             {
                 targetManager.DropTarget(hit.collider.transform.parent.gameObject, true);
+            }
+            if(hit.collider.gameObject.tag == "Throwable")
+            {
+                Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
+                Vector3 dir = -point + hit.transform.position;
+                rb.AddForce(dir * throwForce, ForceMode.Impulse);
             }
         }
     }

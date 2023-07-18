@@ -1733,7 +1733,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.18, z: 0.18}
+  m_Size: {x: 0.16, y: 0.16, z: 0.16}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &707986787
 GameObject:
@@ -2007,7 +2007,6 @@ GameObject:
   - component: {fileID: 748715847}
   - component: {fileID: 748715850}
   - component: {fileID: 748715849}
-  - component: {fileID: 748715848}
   m_Layer: 6
   m_Name: HighScore
   m_TagString: Untagged
@@ -2035,23 +2034,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1.041, y: -0.242}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &748715848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748715846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a69fc56c1e7696498e56745c8825f4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 748715849}
-  timer: {fileID: 590534809}
-  highscoreManager: {fileID: 1193734612}
-  highScoreText: {fileID: 748715849}
 --- !u!114 &748715849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2261,6 +2243,78 @@ PrefabInstance:
     - target: {fileID: 1834737373, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
       propertyPath: m_Volume
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[54].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[55].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[56].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[57].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[58].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[59].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[60].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[61].speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[63].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[64].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[65].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[66].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[67].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[68].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[69].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[70].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[71].speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654519398440182252, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: targets.Array.data[72].speed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8114979862416893192, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2963,7 +3017,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.18, z: 0.18}
+  m_Size: {x: 0.16, y: 0.16, z: 0.16}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &988891591
 GameObject:
@@ -3225,6 +3279,7 @@ MonoBehaviour:
   - {fileID: 643557010}
   - {fileID: 2066189464}
   maxScoreCount: 5
+  scoreManager: {fileID: 384694918}
 --- !u!114 &1193734613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,6 +4890,7 @@ MonoBehaviour:
   maxAmmo: 10
   equippedL: 0
   equippedR: 0
+  throwForce: 0
   fireCooldown: 0.2
   reloadCooldown: 0.1
   lightCooldown: 0.1
@@ -5408,7 +5464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1762256924241837838, guid: 2a5c3dbdf51b31a4b9ba61e3179eb2ee, type: 3}
       propertyPath: m_Size.y
-      value: 3.02
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1762256924241837838, guid: 2a5c3dbdf51b31a4b9ba61e3179eb2ee, type: 3}
       propertyPath: m_Size.z
