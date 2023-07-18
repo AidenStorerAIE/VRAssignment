@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 152679062}
-  Gun: {fileID: 368908078921772993}
+  gun: {fileID: 368908078921772993}
 --- !u!114 &152679070
 MonoBehaviour:
   m_ObjectHideFlags: 0
