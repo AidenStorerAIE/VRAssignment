@@ -7,6 +7,9 @@ public class Magazine : MonoBehaviour
     public int ammoCount;
     public Gun gun;
     Rigidbody rb;
+    bool empty;
+    public float despawnTime = 2f;
+    float despawnTimer;
 
     private void Start()
     {
@@ -40,6 +43,24 @@ public class Magazine : MonoBehaviour
     {
         if(transform.parent != null)
         transform.localPosition = Vector3.zero;
+
+
+        if (!empty && ammoCount <= 0)
+        {
+            empty = true;
+            despawnTimer = Time.time;
+        }
+        if (empty)
+        {
+            //if(gun.attachPointL.GetChild(0).GetComponent<Magazine>() ||
+                //gun.attachPointR.GetChild(0).GetComponent<Magazine>() ||
+                //gun.attachPointL.GetChild(0).GetComponent<Magazine>() != this 
+                //|| gun.attachPointR.GetChild(0).GetComponent<Magazine>())
+            {
+                if (Time.time - despawnTimer > despawnTime)
+                    Destroy(gameObject);
+            }
+        }
     }
 
     public void Drop()
