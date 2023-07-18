@@ -222,23 +222,26 @@ public class Gun : MonoBehaviour
                 loaded = true;
                 if (equippedL)
                 {
-                    mag.Reenable();
-                    equippedL = false;
-                    lHand.transform.GetChild(lHand.transform.childCount - 1).gameObject.SetActive(false);
-                    handModelL.SetActive(false);
-                    //    Magazine magazine = attachPointL.GetChild(0).GetComponent<Magazine>();
 
-                    //    Destroy(magazine.gameObject);
+                    if(curParent == attachPointR)
+                    {
+                        mag.Reenable();
+                    }
+                    equippedL = false;
                 }
-                else
+                else if (equippedR)
+                {
+
+                    if (curParent == attachPointL)
+                    {
+                        mag.Reenable();
+                    }
+                    equippedR = false;
+                }
+                else if((!equippedL && curParent == attachPointR) &&
+                    (!equippedR && curParent == attachPointL))
                 {
                     mag.Reenable();
-                    equippedR = false;
-                    rHand.transform.GetChild(rHand.transform.childCount - 1).gameObject.SetActive(false);
-                    handModelR.SetActive(false);
-                    //    Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
-
-                    //    Destroy(magazine.gameObject);
                 }
                 Destroy(mag.gameObject);
             }

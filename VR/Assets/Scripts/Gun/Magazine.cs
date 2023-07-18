@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class Magazine : MonoBehaviour
 {
@@ -10,11 +12,13 @@ public class Magazine : MonoBehaviour
     bool empty;
     public float despawnTime = 4f;
     float despawnTimer;
+    //public InputActionManager playerInput;
 
     private void Start()
     {
         gun = FindObjectOfType<Gun>();
         rb = GetComponent<Rigidbody>();
+        //playerInput.actionAssets[0].FindAction("FireR").performed += SelectL;
     }
 
     public void SelectL()
@@ -79,8 +83,12 @@ public class Magazine : MonoBehaviour
 
         if (gun.equippedL)
             gun.lHand.transform.GetChild(gun.lHand.transform.childCount - 1).gameObject.SetActive(true);
-        else
+        else if(gun.equippedR)
             gun.rHand.transform.GetChild(gun.rHand.transform.childCount - 1).gameObject.SetActive(true);
+        else if(gun.curParent == gun.attachPointL)
+            gun.rHand.transform.GetChild(gun.rHand.transform.childCount - 1).gameObject.SetActive(true);
+        else if(gun.curParent == gun.attachPointR)
+            gun.lHand.transform.GetChild(gun.lHand.transform.childCount - 1).gameObject.SetActive(true);
         transform.parent = null;
     }
 }
