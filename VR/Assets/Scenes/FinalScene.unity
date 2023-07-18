@@ -568,7 +568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e99a03a123a80964e9ef5dccdf001550, type: 2}
   m_sharedMaterial: {fileID: -7202607305697066869, guid: e99a03a123a80964e9ef5dccdf001550, type: 2}
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e99a03a123a80964e9ef5dccdf001550, type: 2}
   m_sharedMaterial: {fileID: -7202607305697066869, guid: e99a03a123a80964e9ef5dccdf001550, type: 2}
@@ -2250,6 +2250,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1834737373, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8114979862416893192, guid: c45dbc1e767532b4ab04ebb2f2f75436, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.6936188

@@ -63,6 +63,7 @@ public class TargetManager : MonoBehaviour
                             {
                                 targets[gameObjects.IndexOf(gameObject)].active = false;
                                 gameObject.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
+                                gameObject.GetComponent<TargetObj>().score = 0;
                                 DropTarget(gameObject, true);
                                 return;
                             }
@@ -82,6 +83,7 @@ public class TargetManager : MonoBehaviour
                         targets[gameObjects.IndexOf(gameObject)].active = false;
                         targets[gameObjects.IndexOf(gameObject)].timing = false;
                         gameObject.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
+                        gameObject.GetComponent<TargetObj>().score = 0;
                         DropTarget(gameObject, true);
                         return;
                     }
@@ -234,10 +236,8 @@ public class TargetManager : MonoBehaviour
     {
         foreach (GameObject target in gameObjects)
         {
-            target.GetComponent<TargetObj>().score = 0;
             if (targets[gameObjects.IndexOf(target)].active == true)
             {
-                target.GetComponent<TargetObj>().score = 0;
                 target.GetComponent<TargetObj>().audioSourceTwo.volume = 0;
                 target.GetComponent<Animator>().SetTrigger("TargetDrop");
                 targets[gameObjects.IndexOf(target)].active = false;
