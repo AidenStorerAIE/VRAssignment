@@ -217,6 +217,8 @@ public class Gun : MonoBehaviour
                 {
                     mag.Reenable();
                     equippedL = false;
+                    lHand.transform.GetChild(lHand.transform.childCount - 1).gameObject.SetActive(false);
+                    handModelL.SetActive(false);
                     //    Magazine magazine = attachPointL.GetChild(0).GetComponent<Magazine>();
 
                     //    Destroy(magazine.gameObject);
@@ -225,9 +227,11 @@ public class Gun : MonoBehaviour
                 {
                     mag.Reenable();
                     equippedR = false;
-                //    Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
+                    rHand.transform.GetChild(rHand.transform.childCount - 1).gameObject.SetActive(false);
+                    handModelR.SetActive(false);
+                    //    Magazine magazine = attachPointR.GetChild(0).GetComponent<Magazine>();
 
-                //    Destroy(magazine.gameObject);
+                    //    Destroy(magazine.gameObject);
                 }
                 Destroy(mag.gameObject);
             }
